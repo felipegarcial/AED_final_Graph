@@ -1,20 +1,24 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListAdjacency<V> implements IGraph<V> {
-	private List<ListVertex<Vertex<V>>> listV;
+	int size;
+	private Map<Integer, ListVertex<Vertex<V>>> listV;
 
 	public ListAdjacency() {
-		listV = new ArrayList<>();
+		size =0;
+		listV = new HashMap<>();
 	}
 	
 	@Override
 	public boolean addVertex(V v) {
 		Vertex<V> node = new Vertex<>(v);
 		ListVertex<Vertex<V>> l = new ListVertex<>(node);
-		listV.add(l);
+		listV.put(size, l);
 		return false;
 	}
 
