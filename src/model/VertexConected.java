@@ -2,6 +2,6 @@ package model;
 
 public class VertexConected<V> {
 	private V vertex;
-	private int weigth;
+	private double weigth;
 
 }
