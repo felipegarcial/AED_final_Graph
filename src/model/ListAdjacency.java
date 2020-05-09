@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdjacency<V> implements IGraph<V> {
-	private List<ListVertex<V>> listV;
+	private List<ListVertex<Vertex<V>>> listV;
 
 	public ListAdjacency() {
 		listV = new ArrayList<>();
@@ -12,7 +12,9 @@ public class ListAdjacency<V> implements IGraph<V> {
 	
 	@Override
 	public boolean addVertex(V v) {
-		// TODO Auto-generated method stub
+		Vertex<V> node = new Vertex<>(v);
+		ListVertex<Vertex<V>> l = new ListVertex<>(node);
+		listV.add(l);
 		return false;
 	}
 
