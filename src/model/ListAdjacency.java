@@ -19,6 +19,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 		Vertex<V> node = new Vertex<>(v);
 		ListVertex<Vertex<V>> l = new ListVertex<>(node);
 		listV.put(size, l);
+		size ++;
 		return false;
 	}
 
