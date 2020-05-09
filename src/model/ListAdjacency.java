@@ -1,6 +1,8 @@
 package model;
 
+import java.util.List;
+
 public class ListAdjacency<V> implements IGraph<V> {
-	private List<V> first;
+	private List<ListVertex<V>> listV;
 
 }
