@@ -4,7 +4,7 @@ public interface IGraph <V>{
 	
 	public boolean addVertex(V v);
 	public void addEdge(V u, V v, double w);
-	public IGraph<V> bfs();
+	public IGraph<V> bfs(V v);
 	public IGraph<V> dfs(V v);
 	public IGraph<V> prim(IGraph<V> g, V v);
 	public IGraph<V> kurskal(IGraph<V> g, V v);

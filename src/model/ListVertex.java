@@ -9,4 +9,14 @@ public class ListVertex<V> {
 	public ListVertex(V node) {
 		this.node = node;
 	}
+	
+	public ArrayList<VertexConected<V>> getAdjacents(){
+		return adjacents;
+	}
+
+	public V getNode() {
+		return node;
+	}
+
+	
 }
