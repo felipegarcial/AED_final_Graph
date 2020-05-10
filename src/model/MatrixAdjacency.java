@@ -5,10 +5,13 @@ import java.util.Map;
 
 public class MatrixAdjacency <V> implements IGraph<V> {
 	public static int QUANTITY_VERTEX = 15;
-	private Map<V, Integer> vertex;
+	private Map<Integer, V> vertex;
+	private Map<V, Integer> indexVertex;
 	private double [][] matrixWeight;
+	private int size;
 	
 	public MatrixAdjacency() {
+		size = 0;
 		vertex = new  HashMap<>();
 		matrixWeight = new double [QUANTITY_VERTEX][QUANTITY_VERTEX];
 		initMatrix();
@@ -28,14 +31,19 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 
 	@Override
 	public boolean addVertex(V v) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean toReturn = false;
+		if(vertex.containsValue(v)) {
+			vertex.put(size, v);
+			indexVertex.put(v, size);
+			toReturn = true;
+		}
+		return toReturn;
 	}
 
 	@Override
 	public void addEdge(V u, V v, double w) {
-		// TODO Auto-generated method stub
-		
+		int i = indexVertex.get(u);
+		int j = indexVertex.get(v);
 	}
 
 	@Override
