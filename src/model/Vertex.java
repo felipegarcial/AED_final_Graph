@@ -5,12 +5,15 @@ public class Vertex <V> {
 	public final static char BLACK = 'b';
 	public final static char GREY = 'g';
 	private V node;
+	private V precesor;
+	private int distance;
 	private char color;
-	private V izq;
-	private V der;
+	private int index;
 	
-	public Vertex(V node) {
+	public Vertex(V node, Integer index) {
 		this.node= node;
+		this.distance = Integer.MAX_VALUE;
+		this.index = index;
 		color = 'w';
 	}
 	
@@ -22,19 +25,11 @@ public class Vertex <V> {
 		color = newColor;
 	}
 	
-	public V getIzq() {
-		return izq;
+	public V getNode() {
+		return node;
 	}
-	
-	public void setIzq(V newIzq) {
-		izq = newIzq;
-	}
-	
-	public V getDer() {
-		return der;
-	}
-	
-	public void setDer(V newDer) {
-		der = newDer;
+
+	public int getIndex() {
+		return index;
 	}
 }
