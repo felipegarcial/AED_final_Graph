@@ -7,5 +7,9 @@ public class VertexConected<V> {
 	public V getV() {
 		return vertex;
 	}
+	
+	public double getWeigth() {
+		return weigth;
+	}
 
 }

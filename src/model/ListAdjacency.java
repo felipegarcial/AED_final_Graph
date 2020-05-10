@@ -53,11 +53,16 @@ public class ListAdjacency<V> implements IGraph<V> {
 		f.setColor(Vertex.GREY);
 			while(!queue.isEmpty()) {
 				Vertex<V> element = queue.poll();
-				ret.addVertex(v);
+				if(ret.size == 0) {
+				ret.addVertex(element.getNode());
+				}
 				List<VertexConected<Vertex<V>>> lv = adjacents.get(element.getIndex());
 				for(int i=0;i<lv.size();i++) {
 					if(lv.get(i) != null && (lv.get(i).getV().getColor() == Vertex.WHITE)) {
-						queue.add(lv.get(i).getV());
+						Vertex<V> n = search(lv.get(i).getV().getNode());
+						n.setColor(Vertex.GREY);
+						queue.add(n);
+						ret.addEdge(element.getNode(),n.getNode(),lv.get(i).getWeigth());
 					}
 					Vertex<V> y =vertex.get(element);
 					y.setColor(Vertex.BLACK);
