@@ -1,11 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-<<<<<<< HEAD
-=======
 import java.util.LinkedList;
-import java.util.List;
->>>>>>> branch 'master' of https://github.com/felipegarcial/AED_final_Graph.git
 import java.util.Map;
 import java.util.Queue;
 
