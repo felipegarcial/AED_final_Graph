@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 
 public class ListAdjacency<V> implements IGraph<V> {
 	int size;
@@ -81,9 +82,34 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> dfs(V v) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListAdjacency<V> dfs(V v) {
+		ListAdjacency<V> ret = new ListAdjacency<V>();
+		Stack<Vertex<V>> stack= new Stack<>();
+		Vertex<V> f = search(v); 
+		if (vertexI.containsValue(v)) {
+			stack.push(f);
+			f.setColor(Vertex.GREY);
+				while(!stack.isEmpty()) {
+					Vertex<V> element = stack.peek();
+					if(ret.size == 0) {
+					ret.addVertex(element.getNode());
+					}
+					List<VertexConected<Vertex<V>>> lv = adjacents.get(element.getIndex());
+					for(int i=0;i<lv.size();i++) {
+						if(lv.get(i) != null && (lv.get(i).getV().getColor() == Vertex.WHITE)) {
+							Vertex<V> n = search(lv.get(i).getV().getNode());
+							n.setColor(Vertex.GREY);
+							stack.push(n);
+							ret.addEdge(element.getNode(),n.getNode(),lv.get(i).getWeigth());
+						}
+						Vertex<V> y =vertex.get(element);
+						y.setColor(Vertex.BLACK);
+					}
+				}
+				return ret;			
+			}else {
+				return null;
+			}
 	}
 
 	@Override
