@@ -100,34 +100,27 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public ListAdjacency<V> dfs(V v) {
-		ListAdjacency<V> ret = new ListAdjacency<V>();
-		Stack<Vertex<V>> stack = new Stack<>();
-		Vertex<V> f = search(v);
-		if (vertexI.containsValue(v)) {
-			stack.push(f);
-			f.setColor(Vertex.GREY);
-			while (!stack.isEmpty()) {
-				Vertex<V> element = stack.peek();
-				if (ret.size == 0) {
-					ret.addVertex(element.getNode());
-				}
-				List<VertexConected<V>> lv = adjacents.get(element.getIndex());
-				for (int i = 0; i < lv.size(); i++) {
-					if (lv.get(i) != null && (lv.get(i).getV().getColor() == Vertex.WHITE)) {
-						Vertex<V> n = search(lv.get(i).getV().getNode());
-						n.setColor(Vertex.GREY);
-						stack.push(n);
-						ret.addEdge(element.getNode(), n.getNode(), lv.get(i).getWeigth());
-					}
-					Vertex<V> y = vertex.get(element);
-					y.setColor(Vertex.BLACK);
-				}
+	public ArrayList<V> dfs(V v) {
+		ArrayList<V> dfs = new ArrayList<V>();
+		boolean [] visited = new boolean[size];
+		dfs(v, visited, dfs);
+		return dfs;
+	}
+	
+	private void dfs(V v, boolean[] visited, ArrayList<V> dfs) {
+		dfs.add(v);
+		int index = vertexI.get(v);
+		visited[index] = true;
+		List<VertexConected<V>> la = adjacents.get(index);
+		for(int i=0;i<la.size();i++) {
+			if (la.get(i) != null && visited[vertexI.get(la.get(i))] == false) {
+				Vertex<V> vv = search(la.get(i).getV().getNode());
+				dfs(vv.getNode(),visited,dfs);
 			}
-			return ret;
-		} else {
-			return null;
 		}
+		
+		
+		
 	}
 
 	public void prim(V v) {
