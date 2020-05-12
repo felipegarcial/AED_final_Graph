@@ -186,7 +186,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 
 	@Override
 	public IGraph<V> dijsktra(IGraph<V> g, V v) {
-		int[] dist = new int[vertex.size()];
+		int[] dist = new int[vertex.size()];//no tiene que estar ordenada, con el hash o index lo manejamos
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<Vertex<V>>();
 		dist[0] = 0;
 				
@@ -212,6 +212,38 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 
 		return null;
+	}
+	
+	public void DijkstraMañunguero(V v) {
+		int [] dist = new int[size];
+		Vertex<V> ve = search(v); 
+		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
+		dist[ve.getIndex()] = 0;
+		ve.setDistance(0);
+		for(int i = 0; i<= size; i++) {
+			if(ve.getIndex() != vertex.get(i).getIndex()) {
+				vertex.get(i).setDistance(Integer.MAX_VALUE);
+				vertex.get(i).setPredecessor(null);
+				dist[vertex.get(i).getIndex()] = Integer.MAX_VALUE;
+				pq.add(vertex.get(i));
+			}
+		}
+		while(pq.isEmpty()) {
+			Vertex<V> u = pq.poll();
+			int key = u.getIndex();
+			List<VertexConected<V>> adjacent = adjacents.get(key);
+			for(int j = 0; j<=adjacent.size(); j++ ) {
+				int alt = dist[u.getIndex()] - adjacent.get(j).getWeigth();
+				if(alt< adjacent.get(j).getV().getDistance()) {
+					adjacent.get(j).getV().setDistance(alt);
+					dist[adjacent.get(j).getV().getIndex()] = alt;
+					adjacent.get(j).getV().setPredecessor(u);
+					//update pq
+					pq.remove(adjacent.get(j).getV());
+					pq.add(adjacent.get(j).getV());
+				}	
+			}
+		}
 	}
 
 	@Override
