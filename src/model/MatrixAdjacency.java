@@ -7,14 +7,14 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	public static int QUANTITY_VERTEX = 15;
 	private Map<Integer, V> vertex;
 	private Map<V, Integer> indexVertex;
-	private double [][] matrixWeight;
+	private int [][] matrixWeight;
 	private int size;
 	
 	public MatrixAdjacency() {
 		size = 0;
 		vertex = new  HashMap<>();
 		indexVertex = new HashMap<>();
-		matrixWeight = new double [QUANTITY_VERTEX][QUANTITY_VERTEX];
+		matrixWeight = new int [QUANTITY_VERTEX][QUANTITY_VERTEX];
 		initMatrix();
 	}
 	
@@ -24,7 +24,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 				if(i==j) {
 					matrixWeight[i][j] = 0;
 				}else{					
-					matrixWeight[i][j] = Double.POSITIVE_INFINITY;
+					matrixWeight[i][j] = Integer.MAX_VALUE;
 				}
 			}
 		}
@@ -42,7 +42,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public void addEdge(V u, V v, double w) {
+	public void addEdge(V u, V v, int w) {
 		int i = indexVertex.get(u);
 		int j = indexVertex.get(v);
 		System.out.println(i+""+j);
