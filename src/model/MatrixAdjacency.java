@@ -73,7 +73,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> dijsktra(IGraph<V> g) {
+	public IGraph<V> dijsktra(IGraph<V> g, V v) {
 		// TODO Auto-generated method stub
 		return null;
 	}

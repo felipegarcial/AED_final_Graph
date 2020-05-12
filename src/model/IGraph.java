@@ -8,7 +8,7 @@ public interface IGraph <V>{
 	public IGraph<V> dfs(V v);
 	public IGraph<V> prim(IGraph<V> g, V v);
 	public IGraph<V> kurskal(IGraph<V> g, V v);
-	public IGraph<V> dijsktra(IGraph<V> g);
+	public IGraph<V> dijsktra(IGraph<V> g,V v);
 	public IGraph<V> floyd(IGraph<V> g);
 	
 }
