@@ -9,7 +9,11 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
+import unionFind.IUnionFind;
+import unionFind.UnionFind;
+
 public class ListAdjacency<V> implements IGraph<V> {
+	private boolean directed;
 	int size;
 	// der
 	private Map<Integer, List<VertexConected<V>>> adjacents;
@@ -18,6 +22,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 	private Map<V, Integer> vertexI;
 
 	public ListAdjacency() {
+		directed = true;
 		size = 0;
 		adjacents = new HashMap<>();
 		vertex = new HashMap<>();
@@ -40,9 +45,21 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public void addEdge(V u, V v, double w) {
-		// TODO Auto-generated method stub
-
+	public void addEdge(V u, V v, int w) {
+		Vertex<V> v1 = search(v);
+		int i1 = vertexI.get(v);
+		Vertex<V> v2 = search(u);
+		int i2 = vertexI.get(u);
+		List<VertexConected<V>> l = new ArrayList<>();
+		VertexConected<V> edge = new VertexConected<>(v1, v2, w);
+		l.add(edge);
+		adjacents.put(i1, l);
+		if(directed) {
+			List<VertexConected<V>> l2 = new ArrayList<>();
+			VertexConected<V> edgeD = new VertexConected<>(v2, v1, w);
+			l.add(edgeD);
+			adjacents.put(i2, l2);
+		}
 	}
 
 	@Override
@@ -116,12 +133,13 @@ public class ListAdjacency<V> implements IGraph<V> {
 	public void prim(V v) {
 		Vertex<V> r = search(v);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
-		for (int i = 0; i <= vertex.size(); i++) {
+		for (int i = 0; i <= vertex.size()-1; i++) {
 			Vertex<V> e = vertex.get(i);
 			e.setColor(Vertex.WHITE);
 			e.setDistance(Integer.MAX_VALUE);
 		}
 		r.setDistance(0);
+		pq.add(r);
 		while (!pq.isEmpty()) {
 			Vertex<V> u = pq.poll();
 			int index = vertexI.get(u.getNode());
@@ -142,6 +160,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 	@Override
 	public IGraph<V> prim(IGraph<V> g, V v) {
 		// que no se ppierda el grafo original y sacar el grafo a retornar
+		IGraph<V> temp = this;
 		IGraph<V> toReturn = new ListAdjacency<>();
 		toReturn.addVertex(v);
 //			toReturn.addEdge(u, v, w);
@@ -150,7 +169,18 @@ public class ListAdjacency<V> implements IGraph<V> {
 
 	@Override
 	public IGraph<V> kurskal(IGraph<V> g, V v) {
-		// TODO Auto-generated method stub
+		IUnionFind<Vertex<V>> ds = new UnionFind<>();
+		PriorityQueue<VertexConected<V>> pq = new PriorityQueue<>();//ordenar que me saque el menor
+		for(int i = 0;i<=vertex.size()-1;i++) {
+			ds.makeset(vertex.get(i));
+		}
+		VertexConected<V> edge = pq.poll();
+		if(ds.find(edge.getV())!= ds.find(edge.getVertexEnd())) {//mira si start y end pertenecen al mismo conjunto
+			
+			
+			ds.union(edge.getV(), edge.getVertexEnd());
+		}
+		
 		return null;
 	}
 
