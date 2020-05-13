@@ -207,7 +207,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 		return null;
 	}
 	
-	public void DijkstraMañunguero(V v) {
+	public void DijkstraManunguero(V v) {
 		int [] dist = new int[size];
 		Vertex<V> ve = search(v); 
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
@@ -230,7 +230,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 				if(alt< adjacent.get(j).getV().getDistance()) {
 					adjacent.get(j).getV().setDistance(alt);
 					dist[adjacent.get(j).getV().getIndex()] = alt;
-					adjacent.get(j).getV().setPredecessor(u);
+					adjacent.get(j).getVertexEnd().setPredecessor(u);
 					//update pq
 					pq.remove(adjacent.get(j).getV());
 					pq.add(adjacent.get(j).getV());
