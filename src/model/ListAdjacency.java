@@ -125,7 +125,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 	public void prim(V v) {
 		Vertex<V> r = search(v);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
-		for (int i = 0; i <= vertex.size()-1; i++) {
+		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> e = vertex.get(i);
 			e.setColor(Vertex.WHITE);
 			e.setDistance(Integer.MAX_VALUE);
@@ -140,8 +140,8 @@ public class ListAdjacency<V> implements IGraph<V> {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
 				Vertex<V> node = edge.getV();// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
-					node.setDistance((int) edge.getWeigth());
-					pq.add(node);
+					node.setDistance(edge.getWeigth());
+					pq.add(node);//se tendria que actualizar?
 					node.setPredecessor(u);
 				}
 			}
@@ -160,20 +160,25 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> kurskal(IGraph<V> g, V v) {
+	public IGraph<VertexConected<V>> kurskal(IGraph<V> g, V v) {
+		IGraph<VertexConected<V>> toReturn = new ListAdjacency<>();
 		IUnionFind<Vertex<V>> ds = new UnionFind<>();
 		PriorityQueue<VertexConected<V>> pq = new PriorityQueue<>();//ordenar que me saque el menor
-		for(int i = 0;i<=vertex.size()-1;i++) {
+		for(int i = 0;i<size;i++) {
 			ds.makeset(vertex.get(i));
+			List<VertexConected<V>> adj = adjacents.get(i);
+			for (int j = 0; j < adj.size(); j++) {				
+				pq.add(adj.get(j));
+			}
 		}
-		VertexConected<V> edge = pq.poll();
-		if(ds.find(edge.getV())!= ds.find(edge.getVertexEnd())) {//mira si start y end pertenecen al mismo conjunto
-			
-			
-			ds.union(edge.getV(), edge.getVertexEnd());
+		while(!pq.isEmpty()) {
+			VertexConected<V> edge = pq.poll();
+			if(ds.find(edge.getV())!= ds.find(edge.getVertexEnd())) {//mira si start y end pertenecen al mismo conjunto
+				toReturn.addVertex(edge);
+				ds.union(edge.getV(), edge.getVertexEnd());
+			}
 		}
-		
-		return null;
+		return toReturn;
 	}
 
 	@Override

@@ -68,7 +68,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> kurskal(IGraph<V> g, V v) {
+	public IGraph<VertexConected<V>> kurskal(IGraph<V> g, V v) {
 		// TODO Auto-generated method stub
 		return null;
 	}

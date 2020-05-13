@@ -11,15 +11,14 @@ import model.Vertex;
 class ListTest {
 
 	@Test
-	void test() {
+	void search() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		Place d = new Place("Cali");
 		Place d1 = new Place("Popayan");
 		l.addVertex(d);
 		l.addVertex(d1);
 		Vertex<Place> p = l.search(d);
-		System.out.println(p.getNode().getName());
-		
+		assertEquals("Cali", p.getNode().getName());		
 	}
 	
 	@Test
@@ -68,6 +67,11 @@ class ListTest {
 		l.addEdge(d3, d5, 6);
 		l.addEdge(d4, d5, 3);
 		l.dijsktra(d);
+	}
+	
+	@Test
+	void kruskal() {
+		
 	}
 
 }
