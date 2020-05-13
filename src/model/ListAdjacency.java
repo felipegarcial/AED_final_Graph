@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
 import unionFind.IUnionFind;
 import unionFind.UnionFind;
@@ -178,66 +177,39 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> dijsktra(IGraph<V> g, V v) {
-		int[] dist = new int[vertex.size()];//no tiene que estar ordenada, con el hash o index lo manejamos
-		PriorityQueue<Vertex<V>> pq = new PriorityQueue<Vertex<V>>();
-		dist[0] = 0;
-				
-		for (int i = 1; i < vertex.size(); i++) {
-			if(vertex.get(i) != search(v)) {
-				dist[i] = Integer.MAX_VALUE;
-			}
-			vertex.get(i).setDistance(dist[i]);
-			pq.add(vertex.get(i));
-		}
-		
-		while (!pq.isEmpty()) {
-			Vertex <V> vPq = pq.poll();
-			int key = vertexI.get(vPq);
-			for (int i = 0; i < adjacents.get(key).size(); i++) {
-				int alt = dist[i] + (adjacents.get(key).get(i).getWeigth());
-				if(alt < dist[i]) {
-					dist[i] = alt;
-					//prev[i] = 
-				}
-			}
-			
-		}
-
-		return null;
-	}
-	
-	public void DijkstraManunguero(V v) {
+	public IGraph<V> dijsktra(V v) {
 		int [] dist = new int[size];
 		Vertex<V> ve = search(v); 
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		dist[ve.getIndex()] = 0;
 		ve.setDistance(0);
-		for(int i = 0; i<= size; i++) {
+		for(int i = 0; i< size; i++) {
 			if(ve.getIndex() != vertex.get(i).getIndex()) {
 				vertex.get(i).setDistance(Integer.MAX_VALUE);
 				vertex.get(i).setPredecessor(null);
 				dist[vertex.get(i).getIndex()] = Integer.MAX_VALUE;
-				pq.add(vertex.get(i));
 			}
+			pq.add(vertex.get(i));
 		}
-		while(pq.isEmpty()) {
+		while(!pq.isEmpty()) {
 			Vertex<V> u = pq.poll();
 			int key = u.getIndex();
 			List<VertexConected<V>> adjacent = adjacents.get(key);
 			for(int j = 0; j<=adjacent.size(); j++ ) {
-				int alt = dist[u.getIndex()] - adjacent.get(j).getWeigth();
-				if(alt< adjacent.get(j).getV().getDistance()) {
-					adjacent.get(j).getV().setDistance(alt);
-					dist[adjacent.get(j).getV().getIndex()] = alt;
+				int alt = dist[u.getIndex()] + adjacent.get(j).getWeigth();
+				if(alt< adjacent.get(j).getVertexEnd().getDistance()) {
+					adjacent.get(j).getVertexEnd().setDistance(alt);
+					dist[adjacent.get(j).getVertexEnd().getIndex()] = alt;
 					adjacent.get(j).getVertexEnd().setPredecessor(u);
 					//update pq
-					pq.remove(adjacent.get(j).getV());
-					pq.add(adjacent.get(j).getV());
+					pq.remove(adjacent.get(j).getVertexEnd());
+					pq.add(adjacent.get(j).getVertexEnd());
 				}	
 			}
 		}
+		return null;
 	}
+
 
 	@Override
 	public int[][] floyd() {

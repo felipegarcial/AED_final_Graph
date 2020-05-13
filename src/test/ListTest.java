@@ -42,5 +42,32 @@ class ListTest {
 		l.addEdge(d4, d5, 900);
 		l.prim(d);
 	}
+	
+	@Test
+	void dijsktra() {
+		ListAdjacency<Place> l = new ListAdjacency<>();
+		Place d = new Place("a");
+		Place d1 = new Place("b");
+		Place d2 = new Place("c");
+		Place d3 = new Place("d");
+		Place d4 = new Place("e");
+		Place d5 = new Place("z");
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addVertex(d4);
+		l.addVertex(d5);
+		l.addEdge(d, d1, 4);
+		l.addEdge(d, d2, 2);
+		l.addEdge(d1, d2, 1);
+		l.addEdge(d1, d3, 5);
+		l.addEdge(d2, d3, 8);
+		l.addEdge(d2, d4, 10);
+		l.addEdge(d3, d4, 2);
+		l.addEdge(d3, d5, 6);
+		l.addEdge(d4, d5, 3);
+		l.dijsktra(d);
+	}
 
 }

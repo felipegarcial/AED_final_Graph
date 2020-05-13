@@ -10,7 +10,7 @@ public interface IGraph <V>{
 	public ArrayList<V> dfs(V v);
 	public IGraph<V> prim(IGraph<V> g, V v);
 	public IGraph<V> kurskal(IGraph<V> g, V v);
-	public IGraph<V> dijsktra(IGraph<V> g,V v);
+	public IGraph<V> dijsktra(V v);
 	public int[][] floyd();
 	
 }
