@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> dfs(V v) {
+	public ArrayList<V> dfs(V v) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -79,9 +80,26 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> floyd(IGraph<V> g) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[][] floyd() {
+		int dist[][] = new int[QUANTITY_VERTEX][QUANTITY_VERTEX];
+		int i,j,k;
+		
+		for(i=0;i<QUANTITY_VERTEX;i++) {
+			for(j=0;j<QUANTITY_VERTEX;j++) {
+				dist[i][j] = matrixWeight[i][j];
+			}
+		}
+		
+		for(k=0;k<QUANTITY_VERTEX;k++) {
+			for(i=0;i<QUANTITY_VERTEX;i++) {
+				for(j=0;j<QUANTITY_VERTEX;j++) {
+					if(dist[i][k] + dist[k][j] < dist[i][j]) {
+						dist[i][j] = dist[i][k] + dist[k][j];
+					}
+				}
+			}
+		}
+		return dist;
 	}
 			
 }

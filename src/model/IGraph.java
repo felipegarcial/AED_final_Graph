@@ -11,6 +11,6 @@ public interface IGraph <V>{
 	public IGraph<V> prim(IGraph<V> g, V v);
 	public IGraph<V> kurskal(IGraph<V> g, V v);
 	public IGraph<V> dijsktra(IGraph<V> g,V v);
-	public IGraph<V> floyd(IGraph<V> g);
+	public int[][] floyd();
 	
 }

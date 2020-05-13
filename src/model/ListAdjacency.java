@@ -240,7 +240,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> floyd(IGraph<V> g) {
+	public int[][] floyd() {
 		// TODO Auto-generated method stub
 		return null;
 	}
