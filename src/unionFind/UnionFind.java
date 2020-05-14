@@ -3,16 +3,20 @@ import java.util.*;
 
 public class UnionFind<V> implements IUnionFind<V>{
 	
-	private ArrayList<Node<V>> representantes; 
+	private ArrayList<Node<V>> representantes;
+	private int id;
 	
 	public UnionFind() {
 		representantes = new ArrayList<>();
+		id = 0;
 	}
 	
 	@Override
 	public void makeset(V v) {
 		Node<V> n = new Node<>(v);
+		n.setId(id);
 		representantes.add(n);
+		id++;
 	}
 
 	@Override
@@ -29,6 +33,15 @@ public class UnionFind<V> implements IUnionFind<V>{
 		representantes.remove(v2.getId());
 	}
 	
+	
+	public ArrayList<Node<V>> getRepresentantes() {
+		return representantes;
+	}
+
+	public void setRepresentantes(ArrayList<Node<V>> representantes) {
+		this.representantes = representantes;
+	}
+
 	public Node<V> search(V v){
 		boolean stop = false;
 		Node<V> toReturn = null;

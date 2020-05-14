@@ -45,15 +45,15 @@ public class ListAdjacency<V> implements IGraph<V> {
 
 	@Override
 	public void addEdge(V u, V v, int w) {
-		Vertex<V> v1 = search(v);
-		int i1 = vertexI.get(v);
-		Vertex<V> v2 = search(u);
-		int i2 = vertexI.get(u);
+		Vertex<V> v1 = search(u);
+		int i1 = vertexI.get(u);
+		Vertex<V> v2 = search(v);
+		int i2 = vertexI.get(v);
 		List<VertexConected<V>> l = new ArrayList<>();
 		VertexConected<V> edge = new VertexConected<>(v1, v2, w);
 		l.add(edge);
 		adjacents.put(i1, l);
-		if(directed) {
+		if(directed == false) {
 			List<VertexConected<V>> l2 = new ArrayList<>();
 			VertexConected<V> edgeD = new VertexConected<>(v2, v1, w);
 			l.add(edgeD);
@@ -66,7 +66,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 		ListAdjacency<V> ret = new ListAdjacency<V>();
 		Queue<Vertex<V>> queue = new LinkedList<>();
 		Vertex<V> f = search(v);
-		if (vertexI.containsValue(v)) {
+		if (f!=null) {
 			queue.add(f);
 			f.setColor(Vertex.GREY);
 			while (!queue.isEmpty()) {
@@ -160,7 +160,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<VertexConected<V>> kurskal(IGraph<V> g, V v) {
+	public IGraph<VertexConected<V>> kurskal() {
 		IGraph<VertexConected<V>> toReturn = new ListAdjacency<>();
 		IUnionFind<Vertex<V>> ds = new UnionFind<>();
 		PriorityQueue<VertexConected<V>> pq = new PriorityQueue<>();//ordenar que me saque el menor
@@ -214,6 +214,22 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 		return null;
 	}
+	
+    public int [][] Matrix(){
+		int [][] matrix = new int[size][size];
+		for (int i = 0; i < vertex.size(); i++) {
+			Vertex<V> origin = vertex.get(i);
+			List<VertexConected<V>> adjacent = adjacents.get(origin);
+			for (int j = 0; j <adjacent.size();j++) {
+				VertexConected<V> currentEdge = adjacent.get(j);
+				Vertex<V> destination = currentEdge.getVertexEnd();
+				matrix[origin.getIndex()][destination.getIndex()] = currentEdge.getWeigth();
+			}
+		}
+    	
+    	return matrix;
+    	
+    }
 
 
 	@Override

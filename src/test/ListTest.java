@@ -73,5 +73,41 @@ class ListTest {
 	void kruskal() {
 		
 	}
+	
+	@Test
+	void bfs() {
+		ListAdjacency<Place> l = new ListAdjacency<>();
+		Place d = new Place("r");
+		Place d1 = new Place("s");
+		Place d2 = new Place("t");
+		Place d3 = new Place("u");
+		Place d4 = new Place("v");
+		Place d5 = new Place("w");
+		Place d6 = new Place("x");
+		Place d7 = new Place("y");
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addVertex(d4);
+		l.addVertex(d5);
+		l.addVertex(d6);
+		l.addVertex(d7);
+		l.addEdge(d, d4, 1);
+		l.addEdge(d, d1, 1);
+		l.addEdge(d1, d5, 1);
+		l.addEdge(d5, d2, 1);
+		l.addEdge(d5, d6, 1);
+		l.addEdge(d6, d2, 1);
+		l.addEdge(d6, d3, 1);
+		l.addEdge(d6, d7, 1);
+		l.addEdge(d7, d3, 1);
+		l.bfs(d1);
+	}
+	
+	@Test
+	void dfs() {
+		
+	}
 
 }
