@@ -1,26 +1,44 @@
 package unionFind;
+import java.util.*;
 
 public class UnionFind<V> implements IUnionFind<V>{
 	
-	private Node<V>[] representantes; 
-	private Node<V> cola;
-
+	private ArrayList<Node<V>> representantes; 
+	
+	public UnionFind() {
+		representantes = new ArrayList<>();
+	}
+	
 	@Override
 	public void makeset(V v) {
-		// TODO Auto-generated method stub
-		
+		Node<V> n = new Node<>(v);
+		representantes.add(n);
 	}
 
 	@Override
-	public V find(V v) {
-		// TODO Auto-generated method stub
-		return null;
+	public int find(V v) {
+		return search(v).getId(); 
 	}
 
 	@Override
 	public void union(V v, V u) {
-		// TODO Auto-generated method stub
-		
+		Node<V> v1 = search(v);
+		Node<V> v2 = search(u);
+		v1.setNext(v2);
+		v2.setPresesor(v1);
+		representantes.remove(v2.getId());
+	}
+	
+	public Node<V> search(V v){
+		boolean stop = false;
+		Node<V> toReturn = null;
+		for (int i = 0; i < representantes.size() && !stop; i++) {
+			if(representantes.get(i).getNode().equals(v)) {
+				toReturn = representantes.get(i);
+				stop= true;
+			}
+		}
+			return toReturn;
 	}
 
 }
