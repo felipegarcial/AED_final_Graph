@@ -57,12 +57,10 @@ public class ListAdjacency<V> implements IGraph<V> {
 		List<VertexConected<V>> l =  adjacents.get(i1);
 		VertexConected<V> edge = new VertexConected<>(v1, v2, w);
 		l.add(edge);
-//		adjacents.put(i1, l);
 		if(directed == false) {
 			List<VertexConected<V>> l2 = adjacents.get(i2);
 			VertexConected<V> edgeD = new VertexConected<>(v2, v1, w);
 			l2.add(edgeD);
-//			adjacents.put(i2, l2);
 		}
 	}
 
