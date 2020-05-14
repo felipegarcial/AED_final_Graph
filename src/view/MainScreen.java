@@ -41,7 +41,7 @@ public class MainScreen {
 	public void goDeliveryScreen(int screen) {
 		btns[0].click(new Callable<Void>() {
 			public Void call() {
-				Main.screen = 1;
+				Main.screen = screen;
 				return null;
 			}
 		});
