@@ -54,15 +54,15 @@ public class ListAdjacency<V> implements IGraph<V> {
 		int i1 = vertexI.get(u);
 		Vertex<V> v2 = search(v);
 		int i2 = vertexI.get(v);
-		List<VertexConected<V>> l = new ArrayList<>();
+		List<VertexConected<V>> l =  adjacents.get(i1);
 		VertexConected<V> edge = new VertexConected<>(v1, v2, w);
 		l.add(edge);
-		adjacents.put(i1, l);
+//		adjacents.put(i1, l);
 		if(directed == false) {
-			List<VertexConected<V>> l2 = new ArrayList<>();
+			List<VertexConected<V>> l2 = adjacents.get(i2);
 			VertexConected<V> edgeD = new VertexConected<>(v2, v1, w);
-			l.add(edgeD);
-			adjacents.put(i2, l2);
+			l2.add(edgeD);
+//			adjacents.put(i2, l2);
 		}
 	}
 
@@ -71,9 +71,12 @@ public class ListAdjacency<V> implements IGraph<V> {
 		ListAdjacency<V> ret = new ListAdjacency<V>();
 		Queue<Vertex<V>> queue = new LinkedList<>();
 		Vertex<V> f = search(v);
+		//asumimmos que todas las distancias estan en infinito y todos en blanco con predesesor null
 		if (f!=null) {
 			queue.add(f);
 			f.setColor(Vertex.GREY);
+			f.setDistance(0);
+			f.setPredecessor(null);
 			while (!queue.isEmpty()) {
 				Vertex<V> element = queue.poll();
 				if (ret.size == 0) {
@@ -81,15 +84,16 @@ public class ListAdjacency<V> implements IGraph<V> {
 				}
 				List<VertexConected<V>> lv = adjacents.get(element.getIndex());
 				for (int i = 0; i < lv.size(); i++) {
-					if (lv.get(i) != null && (lv.get(i).getV().getColor() == Vertex.WHITE)) {
-						Vertex<V> n = search(lv.get(i).getV().getNode());
+					if (lv.get(i) != null && (lv.get(i).getVertexEnd().getColor() == Vertex.WHITE)) {
+						Vertex<V> n = search(lv.get(i).getVertexEnd().getNode());
 						n.setColor(Vertex.GREY);
+						n.setDistance(element.getDistance()+1);
+						n.setPredecessor(element);
 						queue.add(n);
-						ret.addEdge(element.getNode(), n.getNode(), lv.get(i).getWeigth());
+						ret.addEdge(element.getNode(), n.getNode(), n.getDistance());
 					}
-					Vertex<V> y = vertex.get(element);
-					y.setColor(Vertex.BLACK);
 				}
+				element.setColor(Vertex.BLACK);
 			}
 			return ret;
 		} else {
