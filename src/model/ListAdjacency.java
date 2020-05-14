@@ -214,6 +214,22 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 		return null;
 	}
+	
+    public int [][] Matrix(){
+		int [][] matrix = new int[size][size];
+		for (int i = 0; i < vertex.size(); i++) {
+			Vertex<V> origin = vertex.get(i);
+			List<VertexConected<V>> adjacent = adjacents.get(origin);
+			for (int j = 0; j <adjacent.size();j++) {
+				VertexConected<V> currentEdge = adjacent.get(j);
+				Vertex<V> destination = currentEdge.getVertexEnd();
+				matrix[origin.getIndex()][destination.getIndex()] = currentEdge.getWeigth();
+			}
+		}
+    	
+    	return matrix;
+    	
+    }
 
 
 	@Override
