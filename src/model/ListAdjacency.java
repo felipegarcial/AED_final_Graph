@@ -27,6 +27,11 @@ public class ListAdjacency<V> implements IGraph<V> {
 		vertex = new HashMap<>();
 		vertexI = new HashMap<>();
 	}
+	
+
+	public void setDirected(boolean directed) {
+		this.directed = directed;
+	}
 
 	@Override
 	public boolean addVertex(V v) {

@@ -77,6 +77,7 @@ class ListTest {
 	@Test
 	void bfs() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
+		l.setDirected(false);
 		Place d = new Place("r");
 		Place d1 = new Place("s");
 		Place d2 = new Place("t");
