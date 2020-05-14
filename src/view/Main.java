@@ -4,7 +4,9 @@ import processing.core.PApplet;
 
 public class Main extends PApplet {
 
-	private int screen;
+	public static int screen;
+	private MainScreen mainS;
+	private DeliveryScreen deliveryS;
 
 	public static void main(String[] args) {
 		PApplet.main(Main.class.getName());
@@ -16,6 +18,8 @@ public class Main extends PApplet {
 
 	public void setup() {
 		screen = 0;
+		deliveryS = new DeliveryScreen(this);
+		mainS = new MainScreen(this);
 	}
 
 	public void draw() {
@@ -23,7 +27,10 @@ public class Main extends PApplet {
 
 		switch (screen) {
 		case 0:
-
+			mainS.draw();
+			break;
+		case 1:
+			deliveryS.draw();
 			break;
 
 		default:
@@ -33,6 +40,16 @@ public class Main extends PApplet {
 	}
 
 	public void mousePressed() {
+		switch (screen) {
+		case 0:
+			mainS.goDeliveryScreen(1);
+			break;
+		case 1:
+			
+			break;
 
+		default:
+			break;
+		}
 	}
 }
