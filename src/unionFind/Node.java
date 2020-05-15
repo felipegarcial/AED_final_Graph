@@ -3,6 +3,7 @@ package unionFind;
 public class Node<V> {
 	private V node;
 	private Node<V> next;
+	private Node<V> cola;
 	private Node<V> presesor;
 	private int id;
 	
@@ -42,6 +43,29 @@ public class Node<V> {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public Node<V> getCola() {
+		return cola;
+	}
+
+	public void setCola(Node<V> cola) {
+		this.cola = cola;
+	}
 	
+	public void add(Node<V> n) {
+		if(next == null) {
+			next = n;
+		}
+		else {
+			next.add(n);
+		}
+	}
+	
+	public void updatePredesesor(Node<V> n) {
+		this.presesor = n;
+		if(next != null) {
+			next.updatePredesesor(n);
+		}
+	}
 	
 }

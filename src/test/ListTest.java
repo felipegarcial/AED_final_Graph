@@ -71,7 +71,21 @@ class ListTest {
 	
 	@Test
 	void kruskal() {
-		
+		ListAdjacency<Place> l = new ListAdjacency<>();
+		l.setDirected(false);
+		Place d = new Place("a");
+		Place d1 = new Place("b");
+		Place d2 = new Place("c");
+		Place d3 = new Place("d");
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addEdge(d, d1, 10);
+		l.addEdge(d, d2, 7);
+		l.addEdge(d1, d2, 5);
+		l.addEdge(d1, d3, 3);
+		l.kurskal();
 	}
 	
 	@Test

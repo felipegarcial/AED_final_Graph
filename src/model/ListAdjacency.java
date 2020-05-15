@@ -143,7 +143,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 			Vertex<V> u = pq.poll();
 			int index = vertexI.get(u.getNode());
 			List<VertexConected<V>> ed = adjacents.get(index);// lista de adjacency
-			for (int j = 0; j <= ed.size(); j++) {
+			for (int j = 0; j < ed.size(); j++) {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
 				Vertex<V> node = edge.getV();// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
@@ -180,7 +180,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 		while(!pq.isEmpty()) {
 			VertexConected<V> edge = pq.poll();
-			if(ds.find(edge.getV())!= ds.find(edge.getVertexEnd())) {//mira si start y end pertenecen al mismo conjunto
+			if(ds.find(edge.getV()).getId() != ds.find(edge.getVertexEnd()).getId()) {//mira si start y end pertenecen al mismo conjunto
 				toReturn.addVertex(edge);
 				ds.union(edge.getV(), edge.getVertexEnd());
 			}
