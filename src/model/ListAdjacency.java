@@ -151,7 +151,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
 				Vertex<V> node = edge.getVertexEnd();// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
-					pq.remove(node);
+//					pq.remove(node);
 					node.setDistance(edge.getWeigth());
 					node.setPredecessor(u);
 					pq.add(node);
