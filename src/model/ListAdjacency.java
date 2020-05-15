@@ -237,8 +237,26 @@ public class ListAdjacency<V> implements IGraph<V> {
 
 	@Override
 	public int[][] floyd() {
-		// TODO Auto-generated method stub
-		return null;
+		int [][] initial= Matrix();
+		int dist[][] = new int[size][size];
+		int i,j,k;
+		
+		for(i=0;i<size;i++) {
+			for(j=0;j<size;j++) {
+				dist[i][j] = initial[i][j];
+			}
+		}
+		
+		for(k=0;k<size;k++) {
+			for(i=0;i<size;i++) {
+				for(j=0;j<size;j++) {
+					if(dist[i][k] + dist[k][j] < dist[i][j]) {
+						dist[i][j] = dist[i][k] + dist[k][j];
+					}
+				}
+			}
+		}
+		return dist;
 	}
 
 }
