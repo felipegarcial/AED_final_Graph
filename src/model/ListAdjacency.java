@@ -129,15 +129,19 @@ public class ListAdjacency<V> implements IGraph<V> {
 		
 	}
 
-	public void prim(V v) {
+
+	@Override
+	public IGraph<V> prim(V v) {
 		Vertex<V> r = search(v);
+		r.setDistance(0);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> e = vertex.get(i);
 			e.setColor(Vertex.WHITE);
 			e.setDistance(Integer.MAX_VALUE);
+			e.setPredecessor(null);
+//			pq.add(e);
 		}
-		r.setDistance(0);
 		pq.add(r);
 		while (!pq.isEmpty()) {
 			Vertex<V> u = pq.poll();
@@ -145,25 +149,17 @@ public class ListAdjacency<V> implements IGraph<V> {
 			List<VertexConected<V>> ed = adjacents.get(index);// lista de adjacency
 			for (int j = 0; j < ed.size(); j++) {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
-				Vertex<V> node = edge.getV();// mi vertice adjacente
+				Vertex<V> node = edge.getVertexEnd();// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
+					pq.remove(node);
 					node.setDistance(edge.getWeigth());
-					pq.add(node);//se tendria que actualizar?
 					node.setPredecessor(u);
+					pq.add(node);
 				}
 			}
 			u.setColor(Vertex.BLACK);
 		}
-	}
-
-	@Override
-	public IGraph<V> prim(IGraph<V> g, V v) {
-		// que no se ppierda el grafo original y sacar el grafo a retornar
-		IGraph<V> temp = this;
-		IGraph<V> toReturn = new ListAdjacency<>();
-		toReturn.addVertex(v);
-//			toReturn.addEdge(u, v, w);
-		return toReturn;
+		return this;
 	}
 
 	@Override
@@ -207,7 +203,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 			Vertex<V> u = pq.poll();
 			int key = u.getIndex();
 			List<VertexConected<V>> adjacent = adjacents.get(key);
-			for(int j = 0; j<=adjacent.size(); j++ ) {
+			for(int j = 0; j<adjacent.size(); j++ ) {
 				int alt = dist[u.getIndex()] + adjacent.get(j).getWeigth();
 				if(alt< adjacent.get(j).getVertexEnd().getDistance()) {
 					adjacent.get(j).getVertexEnd().setDistance(alt);
@@ -219,7 +215,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 				}	
 			}
 		}
-		return null;
+		return this;
 	}
 	
     public int [][] Matrix(){

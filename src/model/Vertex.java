@@ -43,7 +43,7 @@ public class Vertex <V> implements Comparable<Vertex<V>>{
 
 	@Override
 	public int compareTo(Vertex<V> o) {
-		return distance-o.getDistance();
+		return (distance- o.getDistance());
 	}
 
 	public Vertex<V> getPredecessor() {
