@@ -129,7 +129,28 @@ class ListTest {
 	
 	@Test
 	void dfs() {
-		
+		ListAdjacency<Place> l = new ListAdjacency<>();
+		Place d = new Place("u");
+		Place d1 = new Place("v");
+		Place d2 = new Place("w");
+		Place d3 = new Place("x");
+		Place d4 = new Place("y");
+		Place d5 = new Place("z");
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addVertex(d4);
+		l.addVertex(d5);
+		l.addEdge(d, d1, 1);
+		l.addEdge(d, d3, 1);
+		l.addEdge(d1, d4, 1);
+		l.addEdge(d4, d3, 1);
+		l.addEdge(d3, d1, 1);
+		l.addEdge(d2, d4, 1);
+		l.addEdge(d2, d5, 1);
+		l.addEdge(d5, d5, 1);
+		l.dfs(d);
 	}
 
 }
