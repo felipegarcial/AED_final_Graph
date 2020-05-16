@@ -32,16 +32,16 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 		}
 	}
 	
-    private ArrayList<VertexConected<V>> getAList(V v) {
-        int index = indexVertex.get(v);
-        ArrayList<VertexConected<V>> result = new ArrayList<>();
-        for(int i=0; i<matrixWeight[index].length; i++) {
-            if(matrixWeight[index][i] != 0 && matrixWeight[index][i] != Double.POSITIVE_INFINITY) {
-                result.add(new VertexConected<V>(v, vertex.get(i), matrixWeight[index][i]));
-            }
-        }
-        return result;
-    }
+	   private ArrayList<VertexConected<V>> getAList(V v) {
+	        int index = indexVertex.get(v);
+	        ArrayList<VertexConected<V>> result = new ArrayList<>();
+	        for(int i=0; i<matrixWeight[index].length; i++) {
+	            if(matrixWeight[index][i] != 0 && matrixWeight[index][i] != Double.POSITIVE_INFINITY) {
+	                result.add(new VertexConected<V>(v, vertex.get(i), matrixWeight[index][i]));
+	            }
+	        }
+	        return result;
+	    }
 
 	@Override
 	public boolean addVertex(V v) {
