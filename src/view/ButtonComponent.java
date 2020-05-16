@@ -33,21 +33,9 @@ public class ButtonComponent {
 			try {
 				func.call();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
 	}
-	
-	
-	   public void dansMethod(Callable<Void> aMethod) {
-		   try {
-			   aMethod.call();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-
 }
