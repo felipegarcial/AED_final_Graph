@@ -132,15 +132,17 @@ public class ListAdjacency<V> implements IGraph<V> {
 
 	@Override
 	public IGraph<V> prim(V v) {
+		ListAdjacency<V> toReturn = new ListAdjacency<>();
 		Vertex<V> r = search(v);
 		r.setDistance(0);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> e = vertex.get(i);
-			e.setColor(Vertex.WHITE);
-			e.setDistance(Integer.MAX_VALUE);
-			e.setPredecessor(null);
-//			pq.add(e);
+			toReturn.addVertex(e.getNode());
+			Vertex<V> e1 = toReturn.search(e.getNode());
+			e1.setColor(Vertex.WHITE);
+			e1.setDistance(Integer.MAX_VALUE);
+			e1.setPredecessor(null);
 		}
 		pq.add(r);
 		while (!pq.isEmpty()) {
@@ -149,17 +151,17 @@ public class ListAdjacency<V> implements IGraph<V> {
 			List<VertexConected<V>> ed = adjacents.get(index);// lista de adjacency
 			for (int j = 0; j < ed.size(); j++) {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
-				Vertex<V> node = edge.getVertexEnd();// mi vertice adjacente
+				Vertex<V> node = toReturn.search(edge.getVertexEnd().getNode());// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
-//					pq.remove(node);
 					node.setDistance(edge.getWeigth());
 					node.setPredecessor(u);
 					pq.add(node);
 				}
 			}
-			u.setColor(Vertex.BLACK);
+			Vertex<V> u2 =toReturn.search(u.getNode());
+			u2.setColor(Vertex.BLACK);
 		}
-		return this;
+		return toReturn;
 	}
 
 	@Override
