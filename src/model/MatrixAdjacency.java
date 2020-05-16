@@ -62,7 +62,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> prim(IGraph<V> g, V v) {
+	public IGraph<V> prim(V v) {
 		// TODO Auto-generated method stub
 		return null;
 	}

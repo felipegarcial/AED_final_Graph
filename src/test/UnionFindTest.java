@@ -24,7 +24,7 @@ class UnionFindTest {
 		u.makeset(c);
 		u.makeset(c1);
 		u.makeset(c2);
-		assertEquals(2, u.find(c2));
+		assertEquals(2, u.find(c2).getId());
 	}
 	
 	@Test

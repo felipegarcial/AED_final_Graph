@@ -54,15 +54,13 @@ public class ListAdjacency<V> implements IGraph<V> {
 		int i1 = vertexI.get(u);
 		Vertex<V> v2 = search(v);
 		int i2 = vertexI.get(v);
-		List<VertexConected<V>> l = new ArrayList<>();
+		List<VertexConected<V>> l =  adjacents.get(i1);
 		VertexConected<V> edge = new VertexConected<>(v1, v2, w);
 		l.add(edge);
-		adjacents.put(i1, l);
 		if(directed == false) {
-			List<VertexConected<V>> l2 = new ArrayList<>();
+			List<VertexConected<V>> l2 = adjacents.get(i2);
 			VertexConected<V> edgeD = new VertexConected<>(v2, v1, w);
-			l.add(edgeD);
-			adjacents.put(i2, l2);
+			l2.add(edgeD);
 		}
 	}
 
@@ -71,9 +69,12 @@ public class ListAdjacency<V> implements IGraph<V> {
 		ListAdjacency<V> ret = new ListAdjacency<V>();
 		Queue<Vertex<V>> queue = new LinkedList<>();
 		Vertex<V> f = search(v);
+		//asumimmos que todas las distancias estan en infinito y todos en blanco con predesesor null
 		if (f!=null) {
 			queue.add(f);
 			f.setColor(Vertex.GREY);
+			f.setDistance(0);
+			f.setPredecessor(null);
 			while (!queue.isEmpty()) {
 				Vertex<V> element = queue.poll();
 				if (ret.size == 0) {
@@ -81,15 +82,16 @@ public class ListAdjacency<V> implements IGraph<V> {
 				}
 				List<VertexConected<V>> lv = adjacents.get(element.getIndex());
 				for (int i = 0; i < lv.size(); i++) {
-					if (lv.get(i) != null && (lv.get(i).getV().getColor() == Vertex.WHITE)) {
-						Vertex<V> n = search(lv.get(i).getV().getNode());
+					if (lv.get(i) != null && (lv.get(i).getVertexEnd().getColor() == Vertex.WHITE)) {
+						Vertex<V> n = search(lv.get(i).getVertexEnd().getNode());
 						n.setColor(Vertex.GREY);
+						n.setDistance(element.getDistance()+1);
+						n.setPredecessor(element);
 						queue.add(n);
-						ret.addEdge(element.getNode(), n.getNode(), lv.get(i).getWeigth());
+						ret.addEdge(element.getNode(), n.getNode(), n.getDistance());
 					}
-					Vertex<V> y = vertex.get(element);
-					y.setColor(Vertex.BLACK);
 				}
+				element.setColor(Vertex.BLACK);
 			}
 			return ret;
 		} else {
@@ -127,40 +129,38 @@ public class ListAdjacency<V> implements IGraph<V> {
 		
 	}
 
-	public void prim(V v) {
+
+	@Override
+	public IGraph<V> prim(V v) {
+		ListAdjacency<V> toReturn = new ListAdjacency<>();
 		Vertex<V> r = search(v);
+		r.setDistance(0);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> e = vertex.get(i);
-			e.setColor(Vertex.WHITE);
-			e.setDistance(Integer.MAX_VALUE);
+			toReturn.addVertex(e.getNode());
+			Vertex<V> e1 = toReturn.search(e.getNode());
+			e1.setColor(Vertex.WHITE);
+			e1.setDistance(Integer.MAX_VALUE);
+			e1.setPredecessor(null);
 		}
-		r.setDistance(0);
 		pq.add(r);
 		while (!pq.isEmpty()) {
 			Vertex<V> u = pq.poll();
 			int index = vertexI.get(u.getNode());
 			List<VertexConected<V>> ed = adjacents.get(index);// lista de adjacency
-			for (int j = 0; j <= ed.size(); j++) {
+			for (int j = 0; j < ed.size(); j++) {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
-				Vertex<V> node = edge.getV();// mi vertice adjacente
+				Vertex<V> node = toReturn.search(edge.getVertexEnd().getNode());// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
 					node.setDistance(edge.getWeigth());
-					pq.add(node);//se tendria que actualizar?
 					node.setPredecessor(u);
+					pq.add(node);
 				}
 			}
-			u.setColor(Vertex.BLACK);
+			Vertex<V> u2 =toReturn.search(u.getNode());
+			u2.setColor(Vertex.BLACK);
 		}
-	}
-
-	@Override
-	public IGraph<V> prim(IGraph<V> g, V v) {
-		// que no se ppierda el grafo original y sacar el grafo a retornar
-		IGraph<V> temp = this;
-		IGraph<V> toReturn = new ListAdjacency<>();
-		toReturn.addVertex(v);
-//			toReturn.addEdge(u, v, w);
 		return toReturn;
 	}
 
@@ -178,7 +178,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 		while(!pq.isEmpty()) {
 			VertexConected<V> edge = pq.poll();
-			if(ds.find(edge.getV())!= ds.find(edge.getVertexEnd())) {//mira si start y end pertenecen al mismo conjunto
+			if(ds.find(edge.getV()).getId() != ds.find(edge.getVertexEnd()).getId()) {//mira si start y end pertenecen al mismo conjunto
 				toReturn.addVertex(edge);
 				ds.union(edge.getV(), edge.getVertexEnd());
 			}
@@ -205,7 +205,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 			Vertex<V> u = pq.poll();
 			int key = u.getIndex();
 			List<VertexConected<V>> adjacent = adjacents.get(key);
-			for(int j = 0; j<=adjacent.size(); j++ ) {
+			for(int j = 0; j<adjacent.size(); j++ ) {
 				int alt = dist[u.getIndex()] + adjacent.get(j).getWeigth();
 				if(alt< adjacent.get(j).getVertexEnd().getDistance()) {
 					adjacent.get(j).getVertexEnd().setDistance(alt);
@@ -217,7 +217,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 				}	
 			}
 		}
-		return null;
+		return this;
 	}
 	
     public int [][] Matrix(){
@@ -239,8 +239,26 @@ public class ListAdjacency<V> implements IGraph<V> {
 
 	@Override
 	public int[][] floyd() {
-		// TODO Auto-generated method stub
-		return null;
+		int [][] initial= Matrix();
+		int dist[][] = new int[size][size];
+		int i,j,k;
+		
+		for(i=0;i<size;i++) {
+			for(j=0;j<size;j++) {
+				dist[i][j] = initial[i][j];
+			}
+		}
+		
+		for(k=0;k<size;k++) {
+			for(i=0;i<size;i++) {
+				for(j=0;j<size;j++) {
+					if(dist[i][k] + dist[k][j] < dist[i][j]) {
+						dist[i][j] = dist[i][k] + dist[k][j];
+					}
+				}
+			}
+		}
+		return dist;
 	}
 
 }

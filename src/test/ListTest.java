@@ -24,6 +24,7 @@ class ListTest {
 	@Test
 	void Prim() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
+		l.setDirected(false);
 		Place d = new Place("at");
 		Place d1 = new Place("ch");
 		Place d2 = new Place("ny");
@@ -37,14 +38,20 @@ class ListTest {
 		l.addEdge(d, d1, 700);
 		l.addEdge(d, d2, 800);
 		l.addEdge(d, d4, 1400);
-		l.addEdge(d1, d5, 1200);
+		l.addEdge(d, d5, 2200);
+		l.addEdge(d4, d2, 1600);
+		l.addEdge(d4, d1, 1300);
 		l.addEdge(d4, d5, 900);
+		l.addEdge(d1, d5, 1200);
+		l.addEdge(d1, d2, 1000);
+		l.addEdge(d2, d5, 2000);
 		l.prim(d);
 	}
 	
 	@Test
 	void dijsktra() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
+		l.setDirected(false);
 		Place d = new Place("a");
 		Place d1 = new Place("b");
 		Place d2 = new Place("c");
@@ -71,7 +78,21 @@ class ListTest {
 	
 	@Test
 	void kruskal() {
-		
+		ListAdjacency<Place> l = new ListAdjacency<>();
+		l.setDirected(false);
+		Place d = new Place("a");
+		Place d1 = new Place("b");
+		Place d2 = new Place("c");
+		Place d3 = new Place("d");
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addEdge(d, d1, 10);
+		l.addEdge(d, d2, 7);
+		l.addEdge(d1, d2, 5);
+		l.addEdge(d1, d3, 3);
+		l.kurskal();
 	}
 	
 	@Test
