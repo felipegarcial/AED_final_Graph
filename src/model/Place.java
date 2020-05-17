@@ -1,14 +1,13 @@
 package model;
 
 public class Place {
-	private String guide,nameClient,product,address;
+	private String guide,nameClient,product;
 	private int lat,lng;
 	
-	public Place(String guide,String nameClient,String product,String address, int lat, int lng) {
+	public Place(String guide,String nameClient,String product, int lat, int lng) {
 		this.guide=guide;
 		this.nameClient=nameClient;
 		this.product=product;
-		this.address=address;
 		this.lat=lat;
 		this.lng=lng;
 	}
@@ -35,14 +34,6 @@ public class Place {
 
 	public void setProduct(String product) {
 		this.product = product;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public int getLat() {

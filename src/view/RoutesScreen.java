@@ -1,11 +1,9 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 import controller.RoutesController;
 import processing.core.PApplet;
-import processing.core.PFont;
 
 public class RoutesScreen extends Screen{
 	
@@ -34,11 +32,17 @@ public class RoutesScreen extends Screen{
 	}
 	
 
-	public void draw() { 
+	public void draw() {
+
+		
+		tableRoutes.draw();
+		app.fill(255);
+		app.noStroke();
+		app.rect(0, 0,900, 120);
+		app.rect(0, 530,900, 150);
 		drawHeader();
 		drawSubHeader();
 		drawButtons();
-		tableRoutes.draw();
 	}
 	
 	private void drawSubHeader() {
@@ -54,12 +58,29 @@ public class RoutesScreen extends Screen{
 	public void loadInfo() {	
 		btns[0].click(new Callable<Void>() {
 			public Void call() {
-				ArrayList <String> places = routesC.loadRoutes();
-				tableRoutes.setPlacesDraw(places);
+				tableRoutes.setPlacesDraw(routesC.loadRoutes());
 				return null;
 			}
 		});
-		
-		
+	}
+	
+	
+	public void goInitScreen(int screen) {	
+		btns[1].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = 0;
+				return null;
+			}
+		});
+	}
+	
+	
+	public void goMapScreen(int screen) {	
+		btns[2].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = screen;
+				return null;
+			}
+		});
 	}
 }

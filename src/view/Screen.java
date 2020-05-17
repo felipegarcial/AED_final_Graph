@@ -23,6 +23,7 @@ public abstract class Screen {
 	
 	
 	public void drawHeader() {
+		app.textAlign(app.LEFT);
 		fontC.draw(title, "montserrat-bold", 25, 0,26,79, 25, 35);
 		app.image(icon, 800, 21,73,19);
 	}
