@@ -57,6 +57,8 @@ public class Main extends PApplet {
 			break;
 		case 2:
 				mapS.selectVehicle();
+				mapS.goInitScreen(0);
+				mapS.goRoutesScreen(1);
 			break;
 
 		default:
@@ -74,7 +76,7 @@ public class Main extends PApplet {
 				routesS.scroolTableComponent(e);
 				break;
 			case 2:
-				
+					
 				break;
 
 			default:

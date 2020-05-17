@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 
 import controller.Controller;
 import controller.MapController;
@@ -22,7 +23,7 @@ public class MapScreen extends Screen {
 	private int posYId;
 	private ArrayList<Place> placesByVehicle;
 	private ArrayList<IdVehicleText> idVehicleTList;
-	private PImage home;
+	private PImage home,mapa;
 
 	public MapScreen(PApplet app) {
 		super("Mapa Enrutador", app);
@@ -56,6 +57,7 @@ public class MapScreen extends Screen {
 		}
 		placesByVehicle = new ArrayList<Place>();
 		home = app.loadImage("./resources/images/casa.png");
+		mapa = app.loadImage("./resources/images/mapa.jpeg");
 	}
 
 	public void draw() {
@@ -84,7 +86,7 @@ public class MapScreen extends Screen {
 	}
 
 	private void drawMap() {
-		app.rect(226, 130, 645, 390);
+		app.image(mapa, 226, 130,645,390);
 	}
 
 	private void drawVehiclesList() {
@@ -128,6 +130,25 @@ public class MapScreen extends Screen {
 		for (int i = 0; i < placesByVehicle.size(); i++) {
 			app.image(home, placesByVehicle.get(i).getLat()+230, placesByVehicle.get(i).getLng()+135);
 		}
+	}
+	
+	
+	public void goInitScreen(int screen) {	
+		btns[1].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = screen;
+				return null;
+			}
+		});
+	}
+	
+	public void goRoutesScreen(int screen) {	
+		btns[0].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = screen;
+				return null;
+			}
+		});
 	}
 
 }
