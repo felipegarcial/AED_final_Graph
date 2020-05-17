@@ -19,7 +19,7 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
-		screen = 1;
+		screen = 2;
 		routesS = new RoutesScreen(this);
 		mainS = new MainScreen(this);
 		mapS  = new MapScreen(this);
