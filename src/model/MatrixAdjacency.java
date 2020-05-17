@@ -194,7 +194,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 		}
 		while(!pq.isEmpty()) {
 			VertexConected<V> edge = pq.poll();
-			if(ds.find(edge.getV()).getId() != ds.find(edge.getV()).getId()) {
+			if(ds.find(edge.getV()).getId() != ds.find(edge.getVertexEnd()).getId()) {
 				toReturn.addVertex(edge);
 				ds.union(edge.getV(), edge.getVertexEnd());
 			}
