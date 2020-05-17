@@ -76,4 +76,10 @@ public class Prodigos {
 
 		return placesDraw;
 	}
+	
+	public int getWeigth(Place p1, Place p2) {
+		int a = (int)Math.pow(p1.getLng()-p2.getLng(), 2);
+		int b = (int)Math.pow(p1.getLat()-p2.getLat(), 2);
+		return (int)Math.sqrt(a-b);
+	}
 }
