@@ -42,7 +42,8 @@ class ListTest {
 		l.addEdge(d1, d5, 1200);
 		l.addEdge(d1, d2, 1000);
 		l.addEdge(d2, d5, 2000);
-		l.prim(d);
+		ListAdjacency<VertexConected<Place>> actual = (ListAdjacency<VertexConected<Place>>) l.prim(d);
+		assertEquals(4, actual.getSize());
 	}
 	
 	@Test
