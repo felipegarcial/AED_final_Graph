@@ -1,18 +1,12 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import model.Prodigos;
+import model.Vehicle;
 
-public class RoutesController {
+public class RoutesController extends Controller {
 	
-	private Prodigos prodigoApp;
+
 	
-	public RoutesController() {
-		prodigoApp = new Prodigos();
-	}
-	
-	public ArrayList <String> loadRoutes() {
-		return prodigoApp.loadInfoCSVRoutes();
-	}
 }

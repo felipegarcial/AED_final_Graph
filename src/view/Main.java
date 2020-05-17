@@ -56,7 +56,7 @@ public class Main extends PApplet {
 			routesS.goMapScreen(2);
 			break;
 		case 2:
-			
+				mapS.selectVehicle();
 			break;
 
 		default:
@@ -65,9 +65,6 @@ public class Main extends PApplet {
 	}
 	
 	public void mouseWheel(MouseEvent event) {
-		 
-		 
-		  
 		  switch (screen) {
 			case 0:
 				mainS.goScreen(1);
