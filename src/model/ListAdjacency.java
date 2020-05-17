@@ -185,9 +185,9 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 		return toReturn;
 	}
-
+//TODO agregar todos a un new grafo, los set deben ser de los vertices del nuevo
 	@Override
-	public IGraph<V> dijsktra(V v) {
+	public IGraph<V> dijsktra(V v) {//debe retornar grafo de aristas?
 		int [] dist = new int[size];
 		Vertex<V> ve = search(v); 
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
