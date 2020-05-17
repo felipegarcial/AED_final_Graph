@@ -204,7 +204,8 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public ArrayList<Vertex<V>> dijsktra(V v) {//debe retornar grafo de aristas?
+	public ArrayList<Vertex<V>> dijsktra(V v) {
+		ArrayList<Vertex<V>> toReturn = new ArrayList<>();
 		int [] dist = new int[size];
 		int index = indexVertex.get(v);
 	    Vertex<V> ve = vertex.get(index);
@@ -217,6 +218,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 				vertex.get(i).setPredecessor(null);
 				dist[vertex.get(i).getIndex()] = Integer.MAX_VALUE;
 	    	}
+	    	toReturn.add(null);
 	    	pq.add(vertex.get(i));
 	    }
 	    while(!pq.isEmpty()) {
@@ -229,13 +231,14 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 					adjacent.get(j).getVertexEnd().setDistance(alt);
 					dist[adjacent.get(j).getVertexEnd().getIndex()] = alt;
 					adjacent.get(j).getVertexEnd().setPredecessor(u);
+					toReturn.set(adjacent.get(j).getVertexEnd().getIndex(), u);
 					//update pq
 					pq.remove(adjacent.get(j).getVertexEnd());
 					pq.add(adjacent.get(j).getVertexEnd());
 				}	
 	    	}
 	    }
-		return null;//TODO check method of lsit
+		return toReturn;
 	}
 
 	@Override

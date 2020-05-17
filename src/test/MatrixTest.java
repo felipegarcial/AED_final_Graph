@@ -58,4 +58,33 @@ class MatrixTest {
 		assertEquals(3, actual.getSize());
 		
 	}
+	
+	@Test
+	void dijsktra() {
+		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
+		l.setDirected(false);
+		Place d = new Place("a", null, null, 0, 0);
+		Place d1 = new Place("b", null, null, 0, 0);
+		Place d2 = new Place("c", null, null, 0, 0);
+		Place d3 = new Place("d", null, null, 0, 0);
+		Place d4 = new Place("e", null, null, 0, 0);
+		Place d5 = new Place("z", null, null, 0, 0);
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addVertex(d4);
+		l.addVertex(d5);
+		l.addEdge(d, d1, 4);
+		l.addEdge(d, d2, 2);
+		l.addEdge(d1, d2, 1);
+		l.addEdge(d1, d3, 5);
+		l.addEdge(d2, d3, 8);
+		l.addEdge(d2, d4, 10);
+		l.addEdge(d3, d4, 2);
+		l.addEdge(d3, d5, 6);
+		l.addEdge(d4, d5, 3);
+		ArrayList<Vertex<Place>> actual = l.dijsktra(d);
+		assertEquals("a", actual.get(2).getNode().getGuide());
+	}
 }

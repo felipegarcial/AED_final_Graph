@@ -71,7 +71,7 @@ class ListTest {
 		l.addEdge(d3, d5, 6);
 		l.addEdge(d4, d5, 3);
 		ArrayList<Vertex<Place>> actual = l.dijsktra(d);
-		assertEquals("c", actual.get(2).getNode().getGuide());
+		assertEquals("a", actual.get(2).getNode().getGuide());
 	}
 	
 	@Test
