@@ -33,6 +33,11 @@ public class ListAdjacency<V> implements IGraph<V> {
 		this.directed = directed;
 	}
 
+	public int getSize() {
+		return size;
+	}
+
+
 	@Override
 	public boolean addVertex(V v) {
 		boolean toReturn = false;
@@ -123,26 +128,21 @@ public class ListAdjacency<V> implements IGraph<V> {
 				Vertex<V> vv = la.get(i).getVertexEnd();
 				dfs(vv.getNode(),visited,dfs);
 			}
-		}
-		
-		
-		
+		}	
 	}
 	
 
 	@Override
-	public IGraph<V> prim(V v) {
-		ListAdjacency<V> toReturn = new ListAdjacency<>();
+	public IGraph<VertexConected<V>> prim(V v) {
+		ListAdjacency<VertexConected<V>> toReturn = new ListAdjacency<>();
 		Vertex<V> r = search(v);
 		r.setDistance(0);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> e = vertex.get(i);
-			toReturn.addVertex(e.getNode());
-			Vertex<V> e1 = toReturn.search(e.getNode());
-			e1.setColor(Vertex.WHITE);
-			e1.setDistance(Integer.MAX_VALUE);
-			e1.setPredecessor(null);
+			e.setColor(Vertex.WHITE);
+			e.setDistance(Integer.MAX_VALUE);
+			e.setPredecessor(null);
 		}
 		pq.add(r);
 		while (!pq.isEmpty()) {
@@ -151,15 +151,15 @@ public class ListAdjacency<V> implements IGraph<V> {
 			List<VertexConected<V>> ed = adjacents.get(index);// lista de adjacency
 			for (int j = 0; j < ed.size(); j++) {
 				VertexConected<V> edge = ed.get(j);// adyacente en la posicion
-				Vertex<V> node = toReturn.search(edge.getVertexEnd().getNode());// mi vertice adjacente
+				Vertex<V> node = edge.getVertexEnd();// mi vertice adjacente
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
 					node.setDistance(edge.getWeigth());
 					node.setPredecessor(u);
+					toReturn.addVertex(edge);//modificar si se utiliza
 					pq.add(node);
 				}
 			}
-			Vertex<V> u2 =toReturn.search(u.getNode());
-			u2.setColor(Vertex.BLACK);
+			u.setColor(Vertex.BLACK);
 		}
 		return toReturn;
 	}
@@ -185,11 +185,12 @@ public class ListAdjacency<V> implements IGraph<V> {
 		}
 		return toReturn;
 	}
-//TODO agregar todos a un new grafo, los set deben ser de los vertices del nuevo
+
 	@Override
-	public IGraph<V> dijsktra(V v) {//debe retornar grafo de aristas?
+	public ArrayList<Vertex<V>> dijsktra(V v) {//retornar arreglo de predesesores
+		ArrayList<Vertex<V>> toReturn = new ArrayList<>();
 		int [] dist = new int[size];
-		Vertex<V> ve = search(v); 
+		Vertex<V> ve = search(v);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		dist[ve.getIndex()] = 0;
 		ve.setDistance(0);
@@ -199,6 +200,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 				vertex.get(i).setPredecessor(null);
 				dist[vertex.get(i).getIndex()] = Integer.MAX_VALUE;
 			}
+			toReturn.add(null);
 			pq.add(vertex.get(i));
 		}
 		while(!pq.isEmpty()) {
@@ -211,14 +213,16 @@ public class ListAdjacency<V> implements IGraph<V> {
 					adjacent.get(j).getVertexEnd().setDistance(alt);
 					dist[adjacent.get(j).getVertexEnd().getIndex()] = alt;
 					adjacent.get(j).getVertexEnd().setPredecessor(u);
+					toReturn.set(adjacent.get(j).getVertexEnd().getIndex(), u);
 					//update pq
 					pq.remove(adjacent.get(j).getVertexEnd());
 					pq.add(adjacent.get(j).getVertexEnd());
 				}	
 			}
 		}
-		return this;
+		return toReturn;
 	}
+	
 	
     public int [][] Matrix(){
 		int [][] matrix = new int[size][size];

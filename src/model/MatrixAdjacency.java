@@ -13,19 +13,36 @@ import unionFind.UnionFind;
 
 public class MatrixAdjacency <V> implements IGraph<V> {
 	public static int QUANTITY_VERTEX = 15;
+//	private int quantityV;
 	private Map<Integer, Vertex<V>> vertex;
 	private Map<V, Integer> indexVertex;
 	private int [][] matrixWeight;
+	private boolean directed;
 	private int size;
 	
 	public MatrixAdjacency() {
+//		this.quantityV = quantityV;
 		size = 0;
+		directed = true;
 		vertex = new  HashMap<>();
 		indexVertex = new HashMap<>();
 		matrixWeight = new int [QUANTITY_VERTEX][QUANTITY_VERTEX];
 		initMatrix();
 	}
 	
+	
+	public boolean isDirected() {
+		return directed;
+	}
+
+	public void setDirected(boolean directed) {
+		this.directed = directed;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
 	public void initMatrix() {
 		for (int i = 0; i < matrixWeight.length; i++) {
 			for (int j = 0; j < matrixWeight.length; j++) {
@@ -38,12 +55,12 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 		}
 	}
 	
-	   private ArrayList<VertexConected<V>> getAList(V v) {//test
+	   public ArrayList<VertexConected<V>> getAList(V v) {//test
 	        int index = indexVertex.get(v);
 	        Vertex<V> e = vertex.get(index);
 	        ArrayList<VertexConected<V>> result = new ArrayList<>();
 	        for(int i=0; i<matrixWeight[index].length; i++) {
-	            if(matrixWeight[index][i] != 0 && matrixWeight[index][i] != Double.POSITIVE_INFINITY) {
+	            if(matrixWeight[index][i] != 0 && matrixWeight[index][i] != Integer.MAX_VALUE) {
 	                result.add(new VertexConected<V>(e, vertex.get(i), matrixWeight[index][i]));
 	            }
 	        }
@@ -68,7 +85,9 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 		int i = indexVertex.get(u);
 		int j = indexVertex.get(v);
 		matrixWeight[i][j] = w;
-		System.out.println(i+""+j);
+		if(directed == false) {
+			matrixWeight[j][i] = w;			
+		}
 	}
 
 	@Override
@@ -131,19 +150,17 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	
 
 	@Override
-	public IGraph<V> prim(V v) {//test
-		ListAdjacency<V> toReturn = new ListAdjacency<>();
+	public IGraph<VertexConected<V>> prim(V v) {//test
+		ListAdjacency<VertexConected<V>> toReturn = new ListAdjacency<>();
 		int index = indexVertex.get(v);
 	    Vertex<V> f = vertex.get(index);
 	    f.setDistance(0);
 		PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
 		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> e = vertex.get(i);
-			toReturn.addVertex(e.getNode());
-			Vertex<V> e1 = toReturn.search(e.getNode());
-			e1.setColor(Vertex.WHITE);
-			e1.setDistance(Integer.MAX_VALUE);
-			e1.setPredecessor(null);
+			e.setColor(Vertex.WHITE);
+			e.setDistance(Integer.MAX_VALUE);
+			e.setPredecessor(null);
 		}
 		pq.add(f);
 		while(!pq.isEmpty()) {
@@ -151,22 +168,21 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 			ArrayList<VertexConected<V>> adjacent = getAList(u.getNode());
 			for (int j = 0; j < adjacent.size(); j++) {
 				VertexConected<V> edge = adjacent.get(j);
-				Vertex<V> node = toReturn.search(edge.getVertexEnd().getNode());
+				Vertex<V> node = edge.getVertexEnd();
 				if (node.getColor() == Vertex.WHITE && edge.getWeigth() < node.getDistance()) {
 					node.setDistance(edge.getWeigth());
 					node.setPredecessor(u);
 					pq.add(node);
 				}
 			}
-			Vertex<V> u2 =toReturn.search(u.getNode());
-			u2.setColor(Vertex.BLACK);
+			u.setColor(Vertex.BLACK);
 		}
 		return toReturn;
 	}
 
 	@Override
 	public IGraph<VertexConected<V>> kurskal() {
-		IGraph<VertexConected<V>> toReturn = new ListAdjacency<>();
+		IGraph<VertexConected<V>> toReturn = new MatrixAdjacency<>();
 		IUnionFind<Vertex<V>> ds = new UnionFind<>();
 		PriorityQueue<VertexConected<V>> pq = new PriorityQueue<>();
 		for(int i = 0;i<size;i++) {
@@ -188,7 +204,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> dijsktra(V v) {//debe retornar grafo de aristas?
+	public ArrayList<Vertex<V>> dijsktra(V v) {//debe retornar grafo de aristas?
 		int [] dist = new int[size];
 		int index = indexVertex.get(v);
 	    Vertex<V> ve = vertex.get(index);

@@ -1,35 +1,32 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
-import model.ListAdjacency;
-import model.Place;
-import model.Vertex;
+import java.util.*;
+import model.*;
 
 class ListTest {
 
 	@Test
 	void search() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
-		Place d = new Place("Cali");
-		Place d1 = new Place("Popayan");
+		Place d = new Place("Cali", null, null, 0, 0);
+		Place d1 = new Place("Popayan", null, null, 0, 0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		Vertex<Place> p = l.search(d);
-		assertEquals("Cali", p.getNode().getName());		
+		assertEquals("Cali", p.getNode().getGuide());		
 	}
 	
 	@Test
 	void Prim() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("at");
-		Place d1 = new Place("ch");
-		Place d2 = new Place("ny");
-		Place d4 = new Place("de");
-		Place d5 = new Place("sf");
+		Place d = new Place("at", null, null, 0, 0);
+		Place d1 = new Place("ch", null, null, 0, 0);
+		Place d2 = new Place("ny", null, null, 0, 0);
+		Place d4 = new Place("de", null, null, 0, 0);
+		Place d5 = new Place("sf", null, null, 0, 0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -52,12 +49,12 @@ class ListTest {
 	void dijsktra() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a");
-		Place d1 = new Place("b");
-		Place d2 = new Place("c");
-		Place d3 = new Place("d");
-		Place d4 = new Place("e");
-		Place d5 = new Place("z");
+		Place d = new Place("a", null, null, 0, 0);
+		Place d1 = new Place("b", null, null, 0, 0);
+		Place d2 = new Place("c", null, null, 0, 0);
+		Place d3 = new Place("d", null, null, 0, 0);
+		Place d4 = new Place("e", null, null, 0, 0);
+		Place d5 = new Place("z", null, null, 0, 0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -73,17 +70,18 @@ class ListTest {
 		l.addEdge(d3, d4, 2);
 		l.addEdge(d3, d5, 6);
 		l.addEdge(d4, d5, 3);
-		l.dijsktra(d);
+		ArrayList<Vertex<Place>> actual = l.dijsktra(d);
+		assertEquals("c", actual.get(2).getNode().getGuide());
 	}
 	
 	@Test
 	void kruskal() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a");
-		Place d1 = new Place("b");
-		Place d2 = new Place("c");
-		Place d3 = new Place("d");
+		Place d = new Place("a", null, null, 0, 0);
+		Place d1 = new Place("b", null, null, 0, 0);
+		Place d2 = new Place("c", null, null, 0, 0);
+		Place d3 = new Place("d", null, null, 0, 0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -92,21 +90,23 @@ class ListTest {
 		l.addEdge(d, d2, 7);
 		l.addEdge(d1, d2, 5);
 		l.addEdge(d1, d3, 3);
-		l.kurskal();
+		ListAdjacency<VertexConected<Place>> actual = (ListAdjacency<VertexConected<Place>>) l.kurskal();
+		assertEquals(3, actual.getSize());
+		
 	}
 	
 	@Test
 	void bfs() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("r");
-		Place d1 = new Place("s");
-		Place d2 = new Place("t");
-		Place d3 = new Place("u");
-		Place d4 = new Place("v");
-		Place d5 = new Place("w");
-		Place d6 = new Place("x");
-		Place d7 = new Place("y");
+		Place d = new Place("r", null, null, 0, 0);
+		Place d1 = new Place("s", null, null, 0, 0);
+		Place d2 = new Place("t", null, null, 0, 0);
+		Place d3 = new Place("u", null, null, 0, 0);
+		Place d4 = new Place("v", null, null, 0, 0);
+		Place d5 = new Place("w", null, null, 0, 0);
+		Place d6 = new Place("x", null, null, 0, 0);
+		Place d7 = new Place("y", null, null, 0, 0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -130,12 +130,12 @@ class ListTest {
 	@Test
 	void dfs() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
-		Place d = new Place("u");
-		Place d1 = new Place("v");
-		Place d2 = new Place("w");
-		Place d3 = new Place("x");
-		Place d4 = new Place("y");
-		Place d5 = new Place("z");
+		Place d = new Place("u", null, null, 0, 0);
+		Place d1 = new Place("v", null, null, 0, 0);
+		Place d2 = new Place("w", null, null, 0, 0);
+		Place d3 = new Place("x", null, null, 0, 0);
+		Place d4 = new Place("y", null, null, 0, 0);
+		Place d5 = new Place("z", null, null, 0, 0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -151,6 +151,11 @@ class ListTest {
 		l.addEdge(d2, d5, 1);
 		l.addEdge(d5, d5, 1);
 		l.dfs(d);
+	}
+	
+	@Test
+	void floyd() {
+		
 	}
 
 }
