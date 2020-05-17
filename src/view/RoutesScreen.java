@@ -2,6 +2,7 @@ package view;
 
 import java.util.concurrent.Callable;
 
+import controller.Controller;
 import controller.RoutesController;
 import processing.core.PApplet;
 
@@ -11,7 +12,7 @@ public class RoutesScreen extends Screen{
 	private PApplet app;
 	private ButtonComponent[] btns;
 	private final int NUMBER_BUTTONS;
-	private RoutesController routesC;
+	private Controller routesC;
 	private TableRoutesComponent tableRoutes;
 	private int posYDataTable;
 	
@@ -84,6 +85,9 @@ public class RoutesScreen extends Screen{
 	public void goMapScreen(int screen) {	
 		btns[2].click(new Callable<Void>() {
 			public Void call() {
+				System.out.println("Entroooooooooooooooooooooooooo");
+				System.out.println(routesC.getVehicles().size());
+				routesC.setMapVehicles(routesC.getVehicles());
 				Main.screen = screen;
 				return null;
 			}
