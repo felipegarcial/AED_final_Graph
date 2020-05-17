@@ -12,30 +12,32 @@ public class Prodigos {
 	private IGraph<Place> graph2;
 	private File fileCSV;
 	private BufferedReader brFileCSV;
+	ArrayList<String> placesDraw; 
 	
 	public Prodigos() {
 		graph1 = new ListAdjacency<Place>();
 		graph2 = new MatrixAdjacency<Place>();
-
+		placesDraw = new ArrayList<String>();
 		fileCSV = new File("./resources/file-csv/CSV_AED.csv");
+		
+	}
+	
+	
+	public ArrayList<String> loadInfoCSVRoutes(){
+		//Read file csv
 		try {
 			brFileCSV = new BufferedReader(new FileReader(fileCSV));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	public ArrayList<String> loadInfoCSVRoutes(){
+		
 		String st;
-		ArrayList<String> placesDraw = new ArrayList<String>();
+		placesDraw.clear();
 		// ------------------------------
 		try {
 			while ((st = brFileCSV.readLine()) != null) {
-				System.out.println(st);
-				placesDraw.add(st);
+				placesDraw.add(st.trim());
 				// -------------------
-				String[] arrayInfoOwner = st.split(",");
 				// -------------------
 			}
 

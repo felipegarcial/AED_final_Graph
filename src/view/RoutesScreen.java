@@ -54,8 +54,7 @@ public class RoutesScreen extends Screen{
 	public void loadInfo() {	
 		btns[0].click(new Callable<Void>() {
 			public Void call() {
-				ArrayList <String> places = routesC.loadRoutes();
-				tableRoutes.setPlacesDraw(places);
+				tableRoutes.setPlacesDraw(routesC.loadRoutes());
 				return null;
 			}
 		});
