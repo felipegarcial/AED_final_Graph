@@ -2,8 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public class MatrixAdjacency <V> implements IGraph<V> {
 	public static int QUANTITY_VERTEX = 15;
@@ -64,9 +66,40 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 
 	@Override
-	public IGraph<V> bfs(V v) { 
-		// TODO Auto-generated method stub
-		return null;
+	public ListAdjacency<V> bfs(V v) {
+		ListAdjacency<V> ret = new ListAdjacency<V>();
+		Queue<Vertex<V>> queue = new LinkedList<>();
+		int index = indexVertex.get(v);
+	    Vertex<V> f = vertex.get(index);
+		//asumimmos que todas las distancias estan en infinito y todos en blanco con predesesor null
+		if (f!=null) {
+			queue.add(f);
+			f.setColor(Vertex.GREY);
+			f.setDistance(0);
+			f.setPredecessor(null);
+			while (!queue.isEmpty()) {
+				Vertex<V> element = queue.poll();
+				if (ret.size == 0) {
+					ret.addVertex(element.getNode());
+				}
+				List<VertexConected<V>> lv = getAList(element.getNode());
+				for (int i = 0; i < lv.size(); i++) {
+					if (lv.get(i) != null && (lv.get(i).getVertexEnd().getColor() == Vertex.WHITE)) {
+						int index2 = indexVertex.get(lv.get(i));
+						Vertex<V> n = vertex.get(index2);;
+						n.setColor(Vertex.GREY);
+						n.setDistance(element.getDistance()+1);
+						n.setPredecessor(element);
+						queue.add(n);
+						ret.addEdge(element.getNode(), n.getNode(), n.getDistance());
+					}
+				}
+				element.setColor(Vertex.BLACK);
+			}
+			return ret;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
