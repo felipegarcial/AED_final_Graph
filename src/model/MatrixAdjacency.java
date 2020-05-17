@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class MatrixAdjacency <V> implements IGraph<V> {
 	public static int QUANTITY_VERTEX = 15;
-	private Map<Integer, V> vertex;
-	private Map<V, Integer> indexVertex;
+	private Map<Integer, Vertex<V>> vertex;
+	private Map<Vertex<V>, Integer> indexVertex;
 	private int [][] matrixWeight;
 	private int size;
 	
@@ -34,10 +34,11 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	
 	   private ArrayList<VertexConected<V>> getAList(V v) {
 	        int index = indexVertex.get(v);
+	        Vertex<V> e = vertex.get(index);
 	        ArrayList<VertexConected<V>> result = new ArrayList<>();
 	        for(int i=0; i<matrixWeight[index].length; i++) {
 	            if(matrixWeight[index][i] != 0 && matrixWeight[index][i] != Double.POSITIVE_INFINITY) {
-	                result.add(new VertexConected<V>(v, vertex.get(i), matrixWeight[index][i]));
+	                result.add(new VertexConected<V>(e, vertex.get(i), matrixWeight[index][i]));
 	            }
 	        }
 	        return result;
@@ -45,10 +46,11 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 
 	@Override
 	public boolean addVertex(V v) {
+		Vertex<V> ve= new Vertex<>(v, size);
 		boolean toReturn = false;
 		if(!vertex.containsValue(v)) {
-			vertex.put(size, v);
-			indexVertex.put(v, size);
+			vertex.put(size, ve);
+			indexVertex.put(ve, size);
 			toReturn = true;
 		}
 		return toReturn;
