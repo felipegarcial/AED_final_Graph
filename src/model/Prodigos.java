@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Queue;
 
 public class Prodigos {
 	private IGraph<Place> graph1;
@@ -22,14 +23,12 @@ public class Prodigos {
 		placesDraw = new ArrayList<String>();
 		fileCSV = new File("./resources/file-csv/csv2.csv");
 		vehicles = new HashMap<String, Vehicle>();
-
-	
 	}
 
 	public void loadInfoCSVRoutes() {
 		String st;
 		placesDraw.clear();
-		
+
 		// Read file csv
 		try {
 			brFileCSV = new BufferedReader(new FileReader(fileCSV));
@@ -89,6 +88,27 @@ public class Prodigos {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Queue<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
+
+		switch (algorithmImp) {
+		case 1:
+			//kruscal lista
+			break;
+		case 2:
+			//kruscal matriz
+			break;
+		case 3:
+			//Prim lista
+			break;
+		case 4:
+			//Prim matriz
+			break;
+		default:
+			break;
+		}
+		return null;
 	}
 
 	public int getWeigth(Place p1, Place p2) {
