@@ -37,9 +37,10 @@ public class TableRoutesComponent {
 		//Drawing info table
 		for (int i = 1; i < placesDraw.size(); i++) {
 			String[] place = placesDraw.get(i).split(",");
+			System.out.println(placesDraw.get(i));
 			for (int j = 0; j < place.length; j++) {
 				int totalWidthString = j == 0 ? 100 : (140 * j) + 100;
-				fontC.draw(i == 0 && j == 0 ? "ID" : place[j], i == 0 ? "montserrat-semibold" : "montserrat-light", 13,
+				fontC.draw(place[j], i == 0 ? "montserrat-semibold" : "montserrat-light", 13,
 						50, 50, 50, totalWidthString, (i == 0 ? 150 : 150 + (i * 30) + posYInfoTable));
 			}
 		}
@@ -49,7 +50,7 @@ public class TableRoutesComponent {
 		
 		//Drawing the title
 		if(placesDraw.size()>0) {
-			String[] placeTitles = placesDraw.get(0).split(";");
+			String[] placeTitles = placesDraw.get(0).split(",");
 			for (int j = 0; j < placeTitles.length; j++) {
 				int totalWidthString = j == 0 ? 100 : (140 * j) + 100;
 				fontC.draw(j == 0 ? "ID" : placeTitles[j], "montserrat-semibold", 13, 50, 50, 50, totalWidthString, 150);

@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 
 import controller.Controller;
 import controller.MapController;
@@ -128,6 +129,25 @@ public class MapScreen extends Screen {
 		for (int i = 0; i < placesByVehicle.size(); i++) {
 			app.image(home, placesByVehicle.get(i).getLat()+230, placesByVehicle.get(i).getLng()+135);
 		}
+	}
+	
+	
+	public void goInitScreen(int screen) {	
+		btns[1].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = screen;
+				return null;
+			}
+		});
+	}
+	
+	public void goRoutesScreen(int screen) {	
+		btns[0].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = screen;
+				return null;
+			}
+		});
 	}
 
 }

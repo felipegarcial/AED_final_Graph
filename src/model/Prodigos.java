@@ -23,17 +23,19 @@ public class Prodigos {
 		fileCSV = new File("./resources/file-csv/csv2.csv");
 		vehicles = new HashMap<String, Vehicle>();
 
+	
+	}
+
+	public void loadInfoCSVRoutes() {
+		String st;
+		placesDraw.clear();
+		
 		// Read file csv
 		try {
 			brFileCSV = new BufferedReader(new FileReader(fileCSV));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void loadInfoCSVRoutes() {
-		String st;
-		placesDraw.clear();
 		// ------------------------------
 		try {
 			while ((st = brFileCSV.readLine()) != null) {
@@ -51,10 +53,15 @@ public class Prodigos {
 
 	public void loadInfoCSVRoutesByVehicle() {
 		String st;
+		// Read file csv
+		try {
+			brFileCSV = new BufferedReader(new FileReader(fileCSV));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		// ------------------------------
 		try {
 			while ((st = brFileCSV.readLine()) != null) {
-				System.out.println(st);
 				if (st.length() > 8) {
 					// ----------------
 					// Creating elements vehicles with their routes

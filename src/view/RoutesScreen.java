@@ -85,9 +85,6 @@ public class RoutesScreen extends Screen{
 	public void goMapScreen(int screen) {	
 		btns[2].click(new Callable<Void>() {
 			public Void call() {
-				System.out.println("Entroooooooooooooooooooooooooo");
-				System.out.println(routesC.getVehicles().size());
-				routesC.setMapVehicles(routesC.getVehicles());
 				Main.screen = screen;
 				return null;
 			}
