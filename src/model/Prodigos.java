@@ -22,10 +22,9 @@ public class Prodigos {
 		placesDraw = new ArrayList<String>();
 		fileCSV = new File("./resources/file-csv/CSV_AED.csv");
 		vehicles = new HashMap<String, Vehicle>();
-
 	}
 
-	public ArrayList<String> loadInfoCSVRoutes() {
+	public ArrayList<String> loadInfoCSVRoutes() { 
 		// Read file csv
 		try {
 			brFileCSV = new BufferedReader(new FileReader(fileCSV));
@@ -63,20 +62,24 @@ public class Prodigos {
 								vehicles.get(idVehicle).addPlaceToDelivery(guide, nameClient, product, lat, lng);
 							}
 						});
-
 					}
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(vehicles.size());
+		
 		if (vehicles.get("TDQ34D") != null) {
 			System.out.println(vehicles.get("TDQ34D").getPlacesToDelivery().size());
 		}
 
 		return placesDraw;
+	}
+	
+	public int getWeigth(Place p1, Place p2) {
+		int a = (int)Math.pow(p1.getLng()-p2.getLng(), 2);
+		int b = (int)Math.pow(p1.getLat()-p2.getLat(), 2);
+		return (int)Math.sqrt(a-b);
 	}
 }
