@@ -23,7 +23,7 @@ public class MapScreen extends Screen {
 	private int posYId;
 	private ArrayList<Place> placesByVehicle;
 	private ArrayList<IdVehicleText> idVehicleTList;
-	private PImage home;
+	private PImage home,mapa;
 
 	public MapScreen(PApplet app) {
 		super("Mapa Enrutador", app);
@@ -57,6 +57,7 @@ public class MapScreen extends Screen {
 		}
 		placesByVehicle = new ArrayList<Place>();
 		home = app.loadImage("./resources/images/casa.png");
+		mapa = app.loadImage("./resources/images/mapa.jpeg");
 	}
 
 	public void draw() {
@@ -85,7 +86,7 @@ public class MapScreen extends Screen {
 	}
 
 	private void drawMap() {
-		app.rect(226, 130, 645, 390);
+		app.image(mapa, 226, 130,645,390);
 	}
 
 	private void drawVehiclesList() {
