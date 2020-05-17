@@ -119,8 +119,8 @@ public class ListAdjacency<V> implements IGraph<V> {
 		visited[index] = true;
 		List<VertexConected<V>> la = adjacents.get(index);
 		for(int i=0;i<la.size();i++) {
-			if (la.get(i) != null && visited[vertexI.get(la.get(i))] == false) {
-				Vertex<V> vv = search(la.get(i).getV().getNode());
+			if (la.get(i) != null && visited[la.get(i).getVertexEnd().getIndex()] == false) {
+				Vertex<V> vv = la.get(i).getVertexEnd();
 				dfs(vv.getNode(),visited,dfs);
 			}
 		}
@@ -128,7 +128,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 		
 		
 	}
-
+	
 
 	@Override
 	public IGraph<V> prim(V v) {
