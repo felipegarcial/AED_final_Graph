@@ -1,6 +1,7 @@
 package view;
 
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 public class Main extends PApplet {
 
@@ -18,7 +19,7 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
-		screen = 0;
+		screen = 1;
 		routesS = new RoutesScreen(this);
 		mainS = new MainScreen(this);
 		mapS  = new MapScreen(this);
@@ -62,4 +63,9 @@ public class Main extends PApplet {
 			break;
 		}
 	}
+	
+	public void mouseWheel(MouseEvent event) {
+		  int e = event.getCount();
+		  println(e);
+		}
 }

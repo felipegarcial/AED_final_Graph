@@ -38,7 +38,6 @@ public class TableRoutesComponent {
 	}
 
 	public void setPlacesDraw(ArrayList<String> placesDraw) {
-		System.out.println(placesDraw.size());
 		this.placesDraw = placesDraw;
 	}
 

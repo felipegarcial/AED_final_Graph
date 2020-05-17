@@ -8,6 +8,7 @@ public class Vehicle {
 	
 	public Vehicle(String id) {
 		this.id = id;
+		places = new ArrayList<Place>();
 	}
 	
 	public void addPlaceToDelivery(String guide,String nameClient,String product, int lat, int lng) {
@@ -16,5 +17,13 @@ public class Vehicle {
 	
 	public ArrayList<Place> getPlacesToDelivery() {
 		return places; 
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

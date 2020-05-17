@@ -1,11 +1,9 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 import controller.RoutesController;
 import processing.core.PApplet;
-import processing.core.PFont;
 
 public class RoutesScreen extends Screen{
 	
@@ -34,11 +32,17 @@ public class RoutesScreen extends Screen{
 	}
 	
 
-	public void draw() { 
+	public void draw() {
+
+		
+		tableRoutes.draw();
+		app.fill(255);
+		app.noStroke();
+		app.rect(0, 0,900, 120);
+		app.rect(0, 530,900, 150);
 		drawHeader();
 		drawSubHeader();
 		drawButtons();
-		tableRoutes.draw();
 	}
 	
 	private void drawSubHeader() {
