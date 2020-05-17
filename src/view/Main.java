@@ -65,7 +65,23 @@ public class Main extends PApplet {
 	}
 	
 	public void mouseWheel(MouseEvent event) {
-		  int e = event.getCount();
-		  println(e);
+		 
+		 
+		  
+		  switch (screen) {
+			case 0:
+				mainS.goScreen(1);
+				break;
+			case 1:
+				int e = event.getCount();
+				routesS.scroolTableComponent(e);
+				break;
+			case 2:
+				
+				break;
+
+			default:
+				break;
+			}
 		}
 }

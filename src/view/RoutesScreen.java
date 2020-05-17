@@ -13,7 +13,7 @@ public class RoutesScreen extends Screen{
 	private final int NUMBER_BUTTONS;
 	private RoutesController routesC;
 	private TableRoutesComponent tableRoutes;
-	
+	private int posYDataTable;
 	public RoutesScreen(PApplet app) {
 		super("Rutas",app);
 		this.app = app;
@@ -29,17 +29,19 @@ public class RoutesScreen extends Screen{
 		
 		routesC = new RoutesController();
 		tableRoutes = new TableRoutesComponent(app);
+		posYDataTable=0;
 	}
 	
 
 	public void draw() {
-
-		
+		//-----
+		//Table Routes
 		tableRoutes.draw();
 		app.fill(255);
 		app.noStroke();
 		app.rect(0, 0,900, 120);
-		app.rect(0, 530,900, 150);
+		app.rect(0, 518,900, 150);
+		//-----
 		drawHeader();
 		drawSubHeader();
 		drawButtons();
@@ -56,6 +58,9 @@ public class RoutesScreen extends Screen{
 	}
 	
 	public void loadInfo() {	
+		tableRoutes.setPosYInfoTable(0);
+		posYDataTable = 0;
+		//---------------
 		btns[0].click(new Callable<Void>() {
 			public Void call() {
 				tableRoutes.setPlacesDraw(routesC.loadRoutes());
@@ -82,5 +87,10 @@ public class RoutesScreen extends Screen{
 				return null;
 			}
 		});
+	}
+	
+	public void scroolTableComponent(int posY) {
+		posYDataTable+= posY*10;
+		tableRoutes.setPosYInfoTable(posYDataTable*-1);
 	}
 }
