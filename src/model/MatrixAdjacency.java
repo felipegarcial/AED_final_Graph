@@ -104,9 +104,25 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 
 	@Override
 	public ArrayList<V> dfs(V v) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<V> dfs = new ArrayList<V>();
+		boolean [] visited = new boolean[QUANTITY_VERTEX];
+		dfs(v, visited, dfs);
+		return dfs;
 	}
+	
+	private void dfs(V v, boolean[] visited, ArrayList<V> dfs) {
+		dfs.add(v);
+		int index = indexVertex.get(v);
+		visited[index] = true;
+		List<VertexConected<V>> lv = getAList(v);
+		for(int i=0;i<lv.size();i++) {
+			if (lv.get(i) != null && visited[lv.get(i).getVertexEnd().getIndex()] == false) {
+				Vertex<V> vv = lv.get(i).getVertexEnd();
+				dfs(vv.getNode(),visited,dfs);
+			}
+		}	
+	}
+	
 
 	@Override
 	public IGraph<V> prim(V v) {
