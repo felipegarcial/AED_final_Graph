@@ -1,9 +1,19 @@
 package view;
 
-public class MapScreen {
+import processing.core.PApplet;
 
-	public MapScreen() {
-
+public class MapScreen extends Screen{
+	
+	private PApplet app;
+	
+	public MapScreen(PApplet app) {
+		super("Mapa Enrutador",app);
+		this.app = app;
+		
+	}
+	
+	public void draw() {
+		drawHeader();
 	}
 
 }

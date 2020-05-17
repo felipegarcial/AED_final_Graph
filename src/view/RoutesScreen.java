@@ -58,7 +58,25 @@ public class RoutesScreen extends Screen{
 				return null;
 			}
 		});
-		
-		
+	}
+	
+	
+	public void goInitScreen(int screen) {	
+		btns[1].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = 0;
+				return null;
+			}
+		});
+	}
+	
+	
+	public void goMapScreen(int screen) {	
+		btns[2].click(new Callable<Void>() {
+			public Void call() {
+				Main.screen = screen;
+				return null;
+			}
+		});
 	}
 }

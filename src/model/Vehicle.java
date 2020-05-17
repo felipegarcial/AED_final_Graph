@@ -10,8 +10,8 @@ public class Vehicle {
 		this.id = id;
 	}
 	
-	public void addPlaceToDelivery(String guide,String nameClient,String product,String address, int lat, int lng) {
-		places.add(new Place(guide,nameClient,product,address,lat,lng));
+	public void addPlaceToDelivery(String guide,String nameClient,String product, int lat, int lng) {
+		places.add(new Place(guide,nameClient,product,lat,lng));
 	}
 	
 	public ArrayList<Place> getPlacesToDelivery() {

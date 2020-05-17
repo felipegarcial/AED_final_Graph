@@ -1,7 +1,7 @@
 package model;
 
 public class Place {
-	private String guide,nameClient,product,address;
+	private String guide,nameClient,product;
 	private int lat,lng;
 	
 	public Place(String guide,String nameClient,String product, int lat, int lng) {
