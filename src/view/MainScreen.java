@@ -13,15 +13,17 @@ public class MainScreen {
 	private PImage imageMain;
 	private ControlP5 cp5;
 	private ButtonComponent[] btns;
+	private final int NUMBER_BUTTONS;
 
 	public MainScreen(PApplet app) {
 		this.app = app;
 		cp5 = new ControlP5(app);
 		imageMain = app.loadImage("./resources/images/mainImage.png");
-		btns = new ButtonComponent[2];
+		NUMBER_BUTTONS = 1;
+		btns = new ButtonComponent[NUMBER_BUTTONS];
 
-		for (int i = 0; i < btns.length; i++) {
-			btns[i] = new ButtonComponent(app, "./resources/images/btn-" + (i + 1) + ".png", (i * 163) + 45, 250);
+		for (int i = 0; i < NUMBER_BUTTONS; i++) {
+			btns[i] = new ButtonComponent(app, "./resources/images/init-btn-" + (i) + ".png", (i * 163) + 45, 250);
 		}
 
 	}
@@ -38,7 +40,7 @@ public class MainScreen {
 		}
 	}
 
-	public void goDeliveryScreen(int screen) {
+	public void goScreen(int screen) {
 		btns[0].click(new Callable<Void>() {
 			public Void call() {
 				Main.screen = screen;
