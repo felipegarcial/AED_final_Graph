@@ -14,8 +14,8 @@ public class Vehicle{
 		posY=0;
 	}
 	
-	public void addPlaceToDelivery(String guide,String nameClient,String product, int lat, int lng) {
-		places.add(new Place(guide,nameClient,product,lat,lng));
+	public void addPlaceToDelivery(String guide,String nameClient,String product, int lat, int lng, int adj) {
+		places.add(new Place(guide,nameClient,product,lat,lng, adj));
 	}
 	
 	public ArrayList<Place> getPlacesToDelivery() {
