@@ -96,23 +96,29 @@ public class Prodigos {
 		LinkedList<Place> placesQ = new LinkedList<Place>();
 		switch (algorithmImp) {
 		case 1:
-			chargeVertex(1, places);
+			/*chargeVertex(1, places);
 			chargeEdges(1);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
 			for (int i = 0; i < t.size(); i++) {
 				VertexConected<Place> f = t.get(i).getNode();
 				placesQ.add(f.getVertexEnd().getNode());
+			}*/
+			for (Place place: places) {
+				placesQ.add(place);
 			}
 			break;
 		case 2:
-			chargeVertex(2, places);
+			/*chargeVertex(2, places);
 			chargeEdges(2);
 			IGraph<VertexConected<Place>> r2 = graph2.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t2 = r2.getVertex();
 			for (int i = 0; i < t2.size(); i++) {
 				VertexConected<Place> f = t2.get(i).getNode();
 				placesQ.add(f.getVertexEnd().getNode());
+			}*/
+			for (Place place: places) {
+				placesQ.add(place);
 			}
 			break;
 		case 3:
