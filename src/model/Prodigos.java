@@ -74,8 +74,7 @@ public class Prodigos {
 						String product = row[3];
 						int lat = Integer.parseInt(row[4]);
 						int lng = Integer.parseInt(row[5]);
-						int adj = Integer.parseInt(row[5]);//trae adjacente
-
+						int adj = Integer.parseInt(row[6]);//trae adjacente
 						if (vehicles.get(idVehicle) == null) {
 							this.vehicles.put(idVehicle, new Vehicle(idVehicle));
 						}
@@ -99,6 +98,7 @@ public class Prodigos {
 		
 		switch (algorithmImp) {
 		case 1:
+			System.out.println("si");
 			chargeVertex(1, places);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			chargeEdges(1);
