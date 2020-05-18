@@ -60,6 +60,22 @@ class MatrixTest {
 	}
 	
 	@Test
+	void testGetVertex() {
+		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
+		l.setDirected(false);
+		Place d = new Place("a", null, null, 0, 0);
+		Place d1 = new Place("b", null, null, 0, 0);
+		Place d2 = new Place("c", null, null, 0, 0);
+		Place d3 = new Place("d", null, null, 0, 0);
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		ArrayList<Vertex<Place>> actual = l.getVertex();
+		assertEquals(4, actual.size());
+	}
+	
+	@Test
 	void dijsktra() {
 		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
 		l.setDirected(false);

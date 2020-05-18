@@ -11,5 +11,6 @@ public interface IGraph <V>{
 	public IGraph<VertexConected<V>> kurskal();
 	public ArrayList<Vertex<V>> dijsktra(V v);
 	public int[][] floyd();
+	public ArrayList<Vertex<V>> getVertex();
 	
 }

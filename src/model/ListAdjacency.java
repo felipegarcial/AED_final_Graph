@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +50,14 @@ public class ListAdjacency<V> implements IGraph<V> {
 			adjacents.put(size, l);
 			size++;
 			toReturn = true;
+		}
+		return toReturn;
+	}
+	
+	public  ArrayList<Vertex<V>> getVertex() {
+		ArrayList<Vertex<V>> toReturn = new ArrayList<>();
+		for (int i = 0; i < vertex.size(); i++) {
+			toReturn.add(vertex.get(i));
 		}
 		return toReturn;
 	}
