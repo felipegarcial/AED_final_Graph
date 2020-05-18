@@ -94,11 +94,8 @@ public class Prodigos {
 
 	public LinkedList<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
 		LinkedList<Place> placesQ = new LinkedList<Place>();
-		System.out.println(algorithmImp);
-		System.out.println(places.size());
 		switch (algorithmImp) {
 		case 1:
-			System.out.println("ENtro 1");
 			chargeVertex(1, places);
 			chargeEdges(1);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
@@ -120,15 +117,19 @@ public class Prodigos {
 			break;
 		case 3:
 			// Prim lista
+			for (Place place: places) {
+				placesQ.add(place);
+			}
 			break;
 		case 4:
 			// Prim matriz
+			for (Place place: places) {
+				placesQ.add(place);
+			}
 			break;
 		default:
 			break;
 		}
-
-		System.out.println("Return:" + " " + placesQ.size());
 		return placesQ;
 
 	}
@@ -158,7 +159,6 @@ public class Prodigos {
 				}
 			}
 		}
-
 		return toReturn;
 	}
 
@@ -187,17 +187,9 @@ public class Prodigos {
 			Place found = searchPlace(adj);
 			chargeE(al, p.get(j), found);
 		}
-
 	}
 
 	public int getWeigth(Place p1, Place p2) {
-
-		System.out.println("================================");
-		System.out.println(p1.getLat());
-		System.out.println(p1.getLng());
-		System.out.println(p2.getLat());
-		System.out.println(p2.getLng());
-
 		int a = (int) Math.pow(p1.getLng() - p2.getLng(), 2);
 		int b = (int) Math.pow(p1.getLat() - p2.getLat(), 2);
 		return (int) Math.sqrt(a - b);
