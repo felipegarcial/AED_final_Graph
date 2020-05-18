@@ -93,20 +93,24 @@ public class Prodigos {
 	}
 
 	public LinkedList<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
+		
+		for (Place place : places) {
+			System.out.println(place.getGuide());
+		}
 		LinkedList<Place> placesQ = new LinkedList<Place>();
 		switch (algorithmImp) {
 		case 1:
-			/*chargeVertex(1, places);
+			chargeVertex(1, places);
 			chargeEdges(1);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
 			for (int i = 0; i < t.size(); i++) {
 				VertexConected<Place> f = t.get(i).getNode();
 				placesQ.add(f.getVertexEnd().getNode());
-			}*/
-			for (Place place: places) {
-				placesQ.add(place);
 			}
+			/*for (Place place: places) {
+				placesQ.add(place);
+			}*/
 			break;
 		case 2:
 			/*chargeVertex(2, places);
@@ -155,6 +159,7 @@ public class Prodigos {
 		Place toReturn = null;
 		
 		for (Vehicle vehicle : vehicles.values()) {
+			System.out.println();
 			Vehicle u = vehicle;
 			ArrayList<Place> p = u.getPlacesToDelivery();
 			for (int j = 0; j < p.size(); j++) {

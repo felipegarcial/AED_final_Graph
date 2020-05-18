@@ -114,8 +114,10 @@ public class ListAdjacency<V> implements IGraph<V> {
 	}
 
 	public Vertex<V> search(V v) {
+		
 		int i = vertexI.get(v);
 		Vertex<V> r = vertex.get(i);
+		System.out.println(r);
 		return r;
 	}
 
