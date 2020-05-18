@@ -74,6 +74,7 @@ public class Prodigos {
 						String product = row[3];
 						int lat = Integer.parseInt(row[4]);
 						int lng = Integer.parseInt(row[5]);
+						int adj = Integer.parseInt(row[5]);//trae adjacente
 
 						if (vehicles.get(idVehicle) == null) {
 							this.vehicles.put(idVehicle, new Vehicle(idVehicle));
@@ -98,22 +99,24 @@ public class Prodigos {
 		
 		switch (algorithmImp) {
 		case 1:
-			/*chargeVertex(1, places);
+			chargeVertex(1, places);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
+			chargeEdges(1);
 			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
 			for (int i = 0; i < t.size(); i++) {
 				VertexConected<Place> f = t.get(i).getNode();
-				toReturn.add(f.getVertexEnd().getNode());
-			}*/
+				placesQ.add(f.getVertexEnd().getNode());
+			}
 			break;
 		case 2:
-			/*chargeVertex(2, places);
+			chargeVertex(2, places);
+			chargeEdges(2);
 			IGraph<VertexConected<Place>> r2 =graph2.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t2 = r2.getVertex();
 			for (int i = 0; i <t2.size(); i++) {
 				VertexConected<Place> f = t2.get(i).getNode();
-				toReturn.add(f.getVertexEnd().getNode());
-			}*/
+				placesQ.add(f.getVertexEnd().getNode());
+			}
 			break;
 		case 3:
 			//Prim lista
@@ -124,12 +127,6 @@ public class Prodigos {
 		default:
 			break;
 		}
-		
-		
-		for (Place place : places) {
-			placesQ.add(place);
-		}
-		
 		return placesQ;
 		
 	}
@@ -147,14 +144,47 @@ public class Prodigos {
 		}
 	}
 	
-//	agrega todas las aristas
-	public void chargeEdges(int al, Place p1, Place p2) {
+	public Place searchPlace(int id) {
+		Place toReturn = null;
+		for(int i = 0; i< vehicles.size(); i++) {
+			if(vehicles.containsKey(i)) {
+				Vehicle u = vehicles.get(i);
+				ArrayList<Place> p = u.getPlacesToDelivery();
+				for (int j = 0; j <p.size() ;j++) {
+					Place pl = p.get(i);
+					int idP = Integer.parseInt(pl.getGuide());
+					if(idP == id) {
+						toReturn = pl;
+					}
+				}
+			}
+		}
+		return toReturn;
+	}
+	
+	public void chargeE(int al, Place p1, Place p2) {
 		if(al == 1) {
 			graph1.addEdge(p1, p2, getWeigth(p1, p2));
 		}
 		else{
 			graph2.addEdge(p1, p2, getWeigth(p1, p2));
 		}
+	}
+	
+//	agrega todas las aristas
+	public void chargeEdges(int al) {
+		for(int i = 0; i< vehicles.size(); i++) {
+			if(vehicles.containsKey(i)) {
+				Vehicle u = vehicles.get(i);
+				ArrayList<Place> p = u.getPlacesToDelivery();
+				for (int j = 0; j <p.size() ;j++) {
+					int adj = p.get(j).getAdjacent();
+					Place found = searchPlace(adj);
+					chargeE(al, p.get(i), found);
+				}
+			}
+		}
+		
 	}
 
 	public int getWeigth(Place p1, Place p2) {
