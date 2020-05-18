@@ -75,10 +75,6 @@ public class Prodigos {
 						int lat = Integer.parseInt(row[4]);
 						int lng = Integer.parseInt(row[5]);
 						int adj = Integer.parseInt(row[6]);//trae adjacente
-<<<<<<< HEAD
-=======
-						
->>>>>>> branch 'master' of https://github.com/felipegarcial/AED_final_Graph.git
 						if (vehicles.get(idVehicle) == null) {
 							this.vehicles.put(idVehicle, new Vehicle(idVehicle));
 						}
@@ -103,14 +99,10 @@ public class Prodigos {
 		System.out.println(places.size());
 		switch (algorithmImp) {
 		case 1:
-<<<<<<< HEAD
-			System.out.println("si");
-=======
 			System.out.println("ENtro 1");
->>>>>>> branch 'master' of https://github.com/felipegarcial/AED_final_Graph.git
 			chargeVertex(1, places);
-			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			chargeEdges(1);
+			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
 			for (int i = 0; i < t.size(); i++) {
 				VertexConected<Place> f = t.get(i).getNode();
@@ -184,17 +176,21 @@ public class Prodigos {
 	
 //	agrega todas las aristas
 	public void chargeEdges(int al) {
-		for(int i = 0; i< vehicles.size(); i++) {
-			if(vehicles.containsKey(i)) {
-				Vehicle u = vehicles.get(i);
-				ArrayList<Place> p = u.getPlacesToDelivery();
-				for (int j = 0; j <p.size() ;j++) {
-					int adj = p.get(j).getAdjacent();
-					Place found = searchPlace(adj);
-					chargeE(al, p.get(i), found);
-				}
-			}
+		Vehicle v1 = vehicles.get("DNJ46F");
+		Vehicle v2 = vehicles.get("TDQ34D");
+		ArrayList<Place> p = v1.getPlacesToDelivery();
+		for (int j = 0; j <p.size() ;j++) {
+			int adj = p.get(j).getAdjacent();
+			Place found = searchPlace(adj);
+			chargeE(al, p.get(j), found);
 		}
+	
+	ArrayList<Place> p1 = v2.getPlacesToDelivery();
+	for (int j = 0; j <p.size() ;j++) {
+		int adj = p.get(j).getAdjacent();
+		Place found = searchPlace(adj);
+		chargeE(al, p.get(j), found);
+	}
 		
 	}
 
