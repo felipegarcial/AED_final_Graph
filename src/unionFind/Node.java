@@ -61,6 +61,13 @@ public class Node<V> {
 		}
 	}
 	
+	public void updateId() {
+		if(next!= null) {
+			next.setId(id);
+			next.updateId();
+		}
+	}
+	
 	public void updatePredesesor(Node<V> n) {
 		this.presesor = n;
 		if(next != null) {

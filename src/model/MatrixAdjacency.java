@@ -5,7 +5,7 @@ import java.util.*;
 import unionFind.*;
 
 public class MatrixAdjacency <V> implements IGraph<V> {
-	public static int QUANTITY_VERTEX = 15;
+	public static int QUANTITY_VERTEX = 40;
 //	private int quantityV;
 	private Map<Integer, Vertex<V>> vertex;
 	private Map<V, Integer> indexVertex;

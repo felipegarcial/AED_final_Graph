@@ -96,29 +96,29 @@ public class Prodigos {
 		LinkedList<Place> placesQ = new LinkedList<Place>();
 		switch (algorithmImp) {
 		case 1:
-//			chargeVertex(1, places);
-//			chargeEdges(1);
-//			IGraph<VertexConected<Place>> r = graph1.kurskal();
-//			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
-//			for (int i = 0; i < t.size(); i++) {
-//				VertexConected<Place> f = t.get(i).getNode();
-//				placesQ.add(f.getVertexEnd().getNode());
-//			}
+			chargeVertex(1, places);
+			chargeEdges(1, places);
+			IGraph<VertexConected<Place>> r = graph1.kurskal();
+			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
+			for (int i = 0; i < t.size(); i++) {
+				VertexConected<Place> f = t.get(i).getNode();
+				placesQ.add(f.getVertexEnd().getNode());
+			}
 			break;
 		case 2:
-			/*chargeVertex(2, places);
-			chargeEdges(2);
+			chargeVertex(2, places);
+			chargeEdges(2, places);
 			IGraph<VertexConected<Place>> r2 = graph2.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t2 = r2.getVertex();
 			for (int i = 0; i < t2.size(); i++) {
 				VertexConected<Place> f = t2.get(i).getNode();
 				placesQ.add(f.getVertexEnd().getNode());
-			}*/
+			}
 			break;
 		case 3:
 			// Prim lista
 			chargeVertex(1, places);
-			chargeEdges(1);
+			chargeEdges(1, places);
 			IGraph<VertexConected<Place>> r3 = graph1.prim(places.get(0));
 			ArrayList<Vertex<VertexConected<Place>>> t3 = r3.getVertex();
 			for (int i = 0; i < t3.size(); i++) {
@@ -129,7 +129,7 @@ public class Prodigos {
 		case 4:
 			// Prim matriz
 			chargeVertex(2, places);
-			chargeEdges(2);
+			chargeEdges(2, places);
 			IGraph<VertexConected<Place>> r4 = graph2.prim(places.get(0));
 			ArrayList<Vertex<VertexConected<Place>>> t4 = r4.getVertex();
 			for (int i = 0; i < t4.size(); i++) {
@@ -155,19 +155,13 @@ public class Prodigos {
 		}
 	}
 
-	public Place searchPlace(int id) {
+	public Place searchPlace(int id, ArrayList<Place> places) {
 		Place toReturn = null;
-		
-		for (Vehicle vehicle : vehicles.values()) {
-			System.out.println();
-			Vehicle u = vehicle;
-			ArrayList<Place> p = u.getPlacesToDelivery();
-			for (int j = 0; j < p.size(); j++) {
-				Place pl = p.get(j);
-				int idP = Integer.parseInt(pl.getGuide());
-				if (idP == id) {
-					toReturn = pl;
-				}
+		for (int j = 0; j < places.size(); j++) {
+			Place pl = places.get(j);
+			int idP = Integer.parseInt(pl.getGuide());
+			if (idP == id) {
+				toReturn = pl;
 			}
 		}
 		return toReturn;
@@ -182,28 +176,18 @@ public class Prodigos {
 	}
 
 //	agrega todas las aristas
-	public void chargeEdges(int al) {
-		Vehicle v1 = vehicles.get("DNJ46F");
-		Vehicle v2 = vehicles.get("TDQ34D");
-		ArrayList<Place> p = v1.getPlacesToDelivery();
-		for (int j = 0; j < p.size(); j++) {
-			int adj = p.get(j).getAdjacent();
-			Place found = searchPlace(adj);
-			chargeE(al, p.get(j), found);
-		}
-
-		ArrayList<Place> p1 = v2.getPlacesToDelivery();
-		for (int j = 0; j < p.size(); j++) {
-			int adj = p.get(j).getAdjacent();
-			Place found = searchPlace(adj);
-			chargeE(al, p.get(j), found);
+	public void chargeEdges(int al, ArrayList<Place> places) {
+		for (int j = 0; j < places.size(); j++) {
+			int adj = places.get(j).getAdjacent();
+			Place found = searchPlace(adj, places);
+			chargeE(al, places.get(j), found);
 		}
 	}
 
 	public int getWeigth(Place p1, Place p2) {
 		int a = (int) Math.pow(p1.getLng() - p2.getLng(), 2);
 		int b = (int) Math.pow(p1.getLat() - p2.getLat(), 2);
-		return (int) Math.sqrt(a - b);
+		return (int) Math.sqrt(a + b);
 	}
 
 	public ArrayList<String> getPlacesDraw() {

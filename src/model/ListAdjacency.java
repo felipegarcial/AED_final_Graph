@@ -117,7 +117,6 @@ public class ListAdjacency<V> implements IGraph<V> {
 		
 		int i = vertexI.get(v);
 		Vertex<V> r = vertex.get(i);
-		System.out.println(r);
 		return r;
 	}
 

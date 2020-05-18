@@ -31,15 +31,17 @@ public class UnionFind<V> implements IUnionFind<V>{
 		Node<V> v2 = search(u);
 		if(v1.getPresesor() == null) {			
 			v2.add(v1);
+			v2.updateId();
 			v1.setPresesor(v2);
 			representantes.remove(v1);
-			v1.setId(v2.getId());
+//			v1.setId(v2.getId());
 		}
 		else {
 			v1.add(v2);	
+			v1.updateId();
 			v2.setPresesor(v1);
 			representantes.remove(v2);
-			v2.setId(v1.getId());
+//			v2.setId(v1.getId());
 		}
 //		v2.updatePredesesor(v1);
 	}
