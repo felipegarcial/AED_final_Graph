@@ -6,12 +6,12 @@ public class LineGraph {
 	private PApplet app;
 	
 	
-	public LineGraph(PApplet app,int posXOne,int posXTwo, int posYOne, int posYTwo) {
+	public LineGraph(PApplet app,int posXOne,int posYOne, int posXTwo, int posYTwo) {
 		this.app = app;
-		this.posXOne = posXOne;
-		this.posXTwo = posXTwo;
-		this.posYOne = posYOne;
-		this.posYTwo = posYTwo;
+		this.posXOne = posXOne+26;
+		this.posYOne = posYOne+26;
+		this.posXTwo = posXTwo+26;
+		this.posYTwo = posYTwo+26;
 	}
 	
 	public void draw() {
@@ -19,7 +19,4 @@ public class LineGraph {
 		app.strokeWeight(1);
 		app.line(posXOne, posYOne, posXTwo, posYTwo);
 	}
-	
-	
-
 }

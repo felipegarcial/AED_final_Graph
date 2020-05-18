@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.concurrent.Callable;
 
 import controller.Controller;
@@ -112,12 +111,9 @@ public class MapScreen extends Screen {
 			if (app.mouseX > idVehicleTList.get(i).getPosX() - 30 && app.mouseX < idVehicleTList.get(i).getPosX() + 30
 					&& app.mouseY > idVehicleTList.get(i).getPosY() - 30
 					&& app.mouseY < idVehicleTList.get(i).getPosY() + 30) {
-				System.out.println("Entro");
-				System.out.println(app.mouseX + " " + idVehicleTList.get(i).getPosX());
-				System.out.println(app.mouseY + " " + idVehicleTList.get(i).getPosY());
 				idVehicleTList.get(i).setSelected(true);
-
 				placesByVehicle = mapC.getPlaces(idVehicleTList.get(i).getId());
+				lineG.clear();
 			} else if ((app.mouseX > 26 && app.mouseX < 140 && app.mouseY > 135 && app.mouseY < 390)) {
 				idVehicleTList.get(i).setSelected(false);
 			}
@@ -185,8 +181,6 @@ public class MapScreen extends Screen {
 				return null;
 			}
 		});
-
-		System.out.println("algoritmh:" + algorithmImp + " " + placesGraph.size());
 	}
 
 	private void addLinesGraph() {
@@ -196,18 +190,16 @@ public class MapScreen extends Screen {
 		int posYTwo = 0;
 
 		for (int i = 0; i < placesGraph.size(); i++) {
-				posXOne = placesGraph.get(i).getLat();
-				posYOne = placesGraph.get(i).getLng();
-				posXTwo = i+1 <placesGraph.size() ? placesGraph.get(i+1).getLat():placesGraph.get(0).getLat();
-				posYTwo = i+1 <placesGraph.size() ? placesGraph.get(i+1).getLng():placesGraph.get(0).getLng();
-				System.out.println(posXOne+" "+posYOne+" - "+posXTwo+" "+posYTwo);
-				lineG.add(new LineGraph(app, posXOne+230, posYOne+135, posXTwo+230, posYTwo+135));
+				posXOne = placesGraph.get(i).getLat()+230;
+				posYOne = placesGraph.get(i).getLng()+135;
+				posXTwo = i+1 <placesGraph.size() ? placesGraph.get(i+1).getLat()+230:placesGraph.get(0).getLat()+230;
+				posYTwo = i+1 <placesGraph.size() ? placesGraph.get(i+1).getLng()+135:placesGraph.get(0).getLng()+135;
+				lineG.add(new LineGraph(app, posXOne, posYOne, posXTwo, posYTwo));
 		}
 	}
 
 	public void drawLinesGraph() {
-		
-		for (int i = 0; i < placesGraph.size(); i++) {
+		for (int i = 0; i < lineG.size(); i++) {
 			lineG.get(i).draw();
 		}
 	}
