@@ -6,10 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class Prodigos {
 	private IGraph<Place> graph1;
@@ -21,7 +19,9 @@ public class Prodigos {
 
 	public Prodigos() {
 		graph1 = new ListAdjacency<Place>();
+		graph1.setDirected(false);
 		graph2 = new MatrixAdjacency<Place>();
+		graph2.setDirected(false);
 		placesDraw = new ArrayList<String>();
 		fileCSV = new File("./resources/file-csv/csv2.csv");
 		vehicles = new HashMap<String, Vehicle>();

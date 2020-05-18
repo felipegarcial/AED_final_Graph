@@ -12,5 +12,5 @@ public interface IGraph <V>{
 	public ArrayList<Vertex<V>> dijsktra(V v);
 	public int[][] floyd();
 	public ArrayList<Vertex<V>> getVertex();
-	
+	public void setDirected(boolean directed);
 }
