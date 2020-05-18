@@ -93,24 +93,17 @@ public class Prodigos {
 	}
 
 	public LinkedList<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
-		
-		for (Place place : places) {
-			System.out.println(place.getGuide());
-		}
 		LinkedList<Place> placesQ = new LinkedList<Place>();
 		switch (algorithmImp) {
 		case 1:
-			chargeVertex(1, places);
-			chargeEdges(1);
-			IGraph<VertexConected<Place>> r = graph1.kurskal();
-			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
-			for (int i = 0; i < t.size(); i++) {
-				VertexConected<Place> f = t.get(i).getNode();
-				placesQ.add(f.getVertexEnd().getNode());
-			}
-			/*for (Place place: places) {
-				placesQ.add(place);
-			}*/
+//			chargeVertex(1, places);
+//			chargeEdges(1);
+//			IGraph<VertexConected<Place>> r = graph1.kurskal();
+//			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
+//			for (int i = 0; i < t.size(); i++) {
+//				VertexConected<Place> f = t.get(i).getNode();
+//				placesQ.add(f.getVertexEnd().getNode());
+//			}
 			break;
 		case 2:
 			/*chargeVertex(2, places);
@@ -121,20 +114,27 @@ public class Prodigos {
 				VertexConected<Place> f = t2.get(i).getNode();
 				placesQ.add(f.getVertexEnd().getNode());
 			}*/
-			for (Place place: places) {
-				placesQ.add(place);
-			}
 			break;
 		case 3:
 			// Prim lista
-			for (Place place: places) {
-				placesQ.add(place);
+			chargeVertex(1, places);
+			chargeEdges(1);
+			IGraph<VertexConected<Place>> r3 = graph1.prim(places.get(0));
+			ArrayList<Vertex<VertexConected<Place>>> t3 = r3.getVertex();
+			for (int i = 0; i < t3.size(); i++) {
+				VertexConected<Place> f = t3.get(i).getNode();
+				placesQ.add(f.getVertexEnd().getNode());
 			}
 			break;
 		case 4:
 			// Prim matriz
-			for (Place place: places) {
-				placesQ.add(place);
+			chargeVertex(2, places);
+			chargeEdges(2);
+			IGraph<VertexConected<Place>> r4 = graph2.prim(places.get(0));
+			ArrayList<Vertex<VertexConected<Place>>> t4 = r4.getVertex();
+			for (int i = 0; i < t4.size(); i++) {
+				VertexConected<Place> f = t4.get(i).getNode();
+				placesQ.add(f.getVertexEnd().getNode());
 			}
 			break;
 		default:
