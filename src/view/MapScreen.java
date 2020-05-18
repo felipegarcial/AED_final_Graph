@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.concurrent.Callable;
 
 import controller.Controller;
-import controller.MapController;
 import model.Vehicle;
 import model.Place;
 import processing.core.PApplet;
@@ -46,7 +45,7 @@ public class MapScreen extends Screen implements Runnable{
 		btns[4] = new ButtonComponent(app, "./resources/images/map-btn-4.png", btns[2].getPosX() + 240, 530);
 		btns[5] = new ButtonComponent(app, "./resources/images/map-btn-5.png", btns[2].getPosX() + 360, 530);
 
-		mapC = new MapController();
+		mapC = new Controller();
 		vehicles = mapC.loadInfoRoutesByVehicle();
 		posYId = 0;
 		idVehicleTList = new ArrayList<IdVehicleText>();
@@ -115,7 +114,6 @@ public class MapScreen extends Screen implements Runnable{
 
 	public void selectVehicle() {
 		for (int i = 0; i < idVehicleTList.size(); i++) {
-			System.out.println(app.mouseX + " " + app.mouseY);
 			if (app.mouseX > idVehicleTList.get(i).getPosX() - 30 && app.mouseX < idVehicleTList.get(i).getPosX() + 30
 					&& app.mouseY > idVehicleTList.get(i).getPosY() - 30
 					&& app.mouseY < idVehicleTList.get(i).getPosY() + 30) {

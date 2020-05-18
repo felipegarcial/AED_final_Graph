@@ -74,8 +74,8 @@ public class Prodigos {
 						String product = row[3];
 						int lat = Integer.parseInt(row[4]);
 						int lng = Integer.parseInt(row[5]);
-						int adj = Integer.parseInt(row[5]);//trae adjacente
-
+						int adj = Integer.parseInt(row[6]);//trae adjacente
+						
 						if (vehicles.get(idVehicle) == null) {
 							this.vehicles.put(idVehicle, new Vehicle(idVehicle));
 						}
@@ -96,9 +96,11 @@ public class Prodigos {
 
 	public LinkedList<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
 		LinkedList<Place> placesQ = new LinkedList<Place>();
-		
+		System.out.println(algorithmImp);
+		System.out.println(places.size());
 		switch (algorithmImp) {
 		case 1:
+			System.out.println("ENtro 1");
 			chargeVertex(1, places);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			chargeEdges(1);
@@ -127,6 +129,8 @@ public class Prodigos {
 		default:
 			break;
 		}
+		
+		System.out.println("Return:"+" "+placesQ.size());
 		return placesQ;
 		
 	}

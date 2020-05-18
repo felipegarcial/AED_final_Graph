@@ -3,7 +3,6 @@ package view;
 import java.util.concurrent.Callable;
 
 import controller.Controller;
-import controller.RoutesController;
 import processing.core.PApplet;
 
 public class RoutesScreen extends Screen{
@@ -29,7 +28,7 @@ public class RoutesScreen extends Screen{
 			btns[i] = new ButtonComponent(app, "./resources/images/routes-btn-" + (i) + ".png", (i * 163) + app.width-490, app.height-70);
 		}
 		
-		routesC = new RoutesController();
+		routesC = new Controller();
 		tableRoutes = new TableRoutesComponent(app);
 		posYDataTable=0;
 	}
