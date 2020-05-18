@@ -37,7 +37,6 @@ public class TableRoutesComponent {
 		//Drawing info table
 		for (int i = 1; i < placesDraw.size(); i++) {
 			String[] place = placesDraw.get(i).split(",");
-			System.out.println(placesDraw.get(i));
 			for (int j = 0; j < place.length; j++) {
 				int totalWidthString = j == 0 ? 100 : (140 * j) + 100;
 				fontC.draw(place[j], i == 0 ? "montserrat-semibold" : "montserrat-light", 13,

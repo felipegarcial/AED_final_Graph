@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Prodigos {
@@ -90,8 +91,9 @@ public class Prodigos {
 		}
 	}
 
-	public Queue<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
-
+	public LinkedList<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
+		LinkedList<Place> placesQ = new LinkedList<Place>();
+		
 		switch (algorithmImp) {
 		case 1:
 			//kruscal lista
@@ -108,7 +110,13 @@ public class Prodigos {
 		default:
 			break;
 		}
-		return null;
+		
+		
+		for (Place place : places) {
+			placesQ.add(place);
+		}
+		
+		return placesQ;
 	}
 
 	public int getWeigth(Place p1, Place p2) {
