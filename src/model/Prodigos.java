@@ -74,7 +74,7 @@ public class Prodigos {
 						String product = row[3];
 						int lat = Integer.parseInt(row[4]);
 						int lng = Integer.parseInt(row[5]);
-						int adj = Integer.parseInt(row[6]);//trae adjacente
+						int adj = Integer.parseInt(row[6]);// trae adjacente
 						if (vehicles.get(idVehicle) == null) {
 							this.vehicles.put(idVehicle, new Vehicle(idVehicle));
 						}
@@ -91,7 +91,6 @@ public class Prodigos {
 			e.printStackTrace();
 		}
 	}
-
 
 	public LinkedList<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
 		LinkedList<Place> placesQ = new LinkedList<Place>();
@@ -112,89 +111,93 @@ public class Prodigos {
 		case 2:
 			chargeVertex(2, places);
 			chargeEdges(2);
-			IGraph<VertexConected<Place>> r2 =graph2.kurskal();
+			IGraph<VertexConected<Place>> r2 = graph2.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t2 = r2.getVertex();
-			for (int i = 0; i <t2.size(); i++) {
+			for (int i = 0; i < t2.size(); i++) {
 				VertexConected<Place> f = t2.get(i).getNode();
 				placesQ.add(f.getVertexEnd().getNode());
 			}
 			break;
 		case 3:
-			//Prim lista
+			// Prim lista
 			break;
 		case 4:
-			//Prim matriz
+			// Prim matriz
 			break;
 		default:
 			break;
 		}
-		
-		System.out.println("Return:"+" "+placesQ.size());
+
+		System.out.println("Return:" + " " + placesQ.size());
 		return placesQ;
-		
+
 	}
-	
-	
-	//agrega todos los vertices a la estructura correspondiente
-	public void chargeVertex(int al , ArrayList<Place> places) {
+
+	// agrega todos los vertices a la estructura correspondiente
+	public void chargeVertex(int al, ArrayList<Place> places) {
 		for (int i = 0; i < places.size(); i++) {
-			if(al == 1) {
+			if (al == 1) {
 				graph1.addVertex(places.get(i));
-			}
-			else{
+			} else {
 				graph2.addVertex(places.get(i));
 			}
 		}
 	}
-	
+
 	public Place searchPlace(int id) {
 		Place toReturn = null;
-		for(int i = 0; i< vehicles.size(); i++) {
-			if(vehicles.containsKey(i)) {
-				Vehicle u = vehicles.get(i);
-				ArrayList<Place> p = u.getPlacesToDelivery();
-				for (int j = 0; j <p.size() ;j++) {
-					Place pl = p.get(i);
-					int idP = Integer.parseInt(pl.getGuide());
-					if(idP == id) {
-						toReturn = pl;
-					}
+		
+		for (Vehicle vehicle : vehicles.values()) {
+			Vehicle u = vehicle;
+			ArrayList<Place> p = u.getPlacesToDelivery();
+			for (int j = 0; j < p.size(); j++) {
+				Place pl = p.get(j);
+				int idP = Integer.parseInt(pl.getGuide());
+				if (idP == id) {
+					toReturn = pl;
 				}
 			}
 		}
+
 		return toReturn;
 	}
-	
+
 	public void chargeE(int al, Place p1, Place p2) {
-		if(al == 1) {
+		if (al == 1) {
 			graph1.addEdge(p1, p2, getWeigth(p1, p2));
-		}
-		else{
+		} else {
 			graph2.addEdge(p1, p2, getWeigth(p1, p2));
 		}
 	}
-	
+
 //	agrega todas las aristas
 	public void chargeEdges(int al) {
 		Vehicle v1 = vehicles.get("DNJ46F");
 		Vehicle v2 = vehicles.get("TDQ34D");
 		ArrayList<Place> p = v1.getPlacesToDelivery();
-		for (int j = 0; j <p.size() ;j++) {
+		for (int j = 0; j < p.size(); j++) {
 			int adj = p.get(j).getAdjacent();
 			Place found = searchPlace(adj);
 			chargeE(al, p.get(j), found);
 		}
-	
-	ArrayList<Place> p1 = v2.getPlacesToDelivery();
-	for (int j = 0; j <p.size() ;j++) {
-		int adj = p.get(j).getAdjacent();
-		Place found = searchPlace(adj);
-		chargeE(al, p.get(j), found);
-	}
-		
+
+		ArrayList<Place> p1 = v2.getPlacesToDelivery();
+		for (int j = 0; j < p.size(); j++) {
+			int adj = p.get(j).getAdjacent();
+			Place found = searchPlace(adj);
+			chargeE(al, p.get(j), found);
+		}
+
 	}
 
 	public int getWeigth(Place p1, Place p2) {
+
+		System.out.println("================================");
+		System.out.println(p1.getLat());
+		System.out.println(p1.getLng());
+		System.out.println(p2.getLat());
+		System.out.println(p2.getLng());
+
 		int a = (int) Math.pow(p1.getLng() - p2.getLng(), 2);
 		int b = (int) Math.pow(p1.getLat() - p2.getLat(), 2);
 		return (int) Math.sqrt(a - b);
