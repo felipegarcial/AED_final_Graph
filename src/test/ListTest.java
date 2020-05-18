@@ -10,8 +10,8 @@ class ListTest {
 	@Test
 	void search() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
-		Place d = new Place("Cali", null, null, 0, 0);
-		Place d1 = new Place("Popayan", null, null, 0, 0);
+		Place d = new Place("Cali", null, null, 0, 0,0);
+		Place d1 = new Place("Popayan", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		Vertex<Place> p = l.search(d);
@@ -22,11 +22,11 @@ class ListTest {
 	void Prim() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("at", null, null, 0, 0);
-		Place d1 = new Place("ch", null, null, 0, 0);
-		Place d2 = new Place("ny", null, null, 0, 0);
-		Place d4 = new Place("de", null, null, 0, 0);
-		Place d5 = new Place("sf", null, null, 0, 0);
+		Place d = new Place("at", null, null, 0, 0,0);
+		Place d1 = new Place("ch", null, null, 0, 0,0);
+		Place d2 = new Place("ny", null, null, 0, 0,0);
+		Place d4 = new Place("de", null, null, 0, 0,0);
+		Place d5 = new Place("sf", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -50,12 +50,12 @@ class ListTest {
 	void dijsktra() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a", null, null, 0, 0);
-		Place d1 = new Place("b", null, null, 0, 0);
-		Place d2 = new Place("c", null, null, 0, 0);
-		Place d3 = new Place("d", null, null, 0, 0);
-		Place d4 = new Place("e", null, null, 0, 0);
-		Place d5 = new Place("z", null, null, 0, 0);
+		Place d = new Place("a", null, null, 0, 0, 0);
+		Place d1 = new Place("b", null, null, 0, 0, 0);
+		Place d2 = new Place("c", null, null, 0, 0,0);
+		Place d3 = new Place("d", null, null, 0, 0,0);
+		Place d4 = new Place("e", null, null, 0, 0,0);
+		Place d5 = new Place("z", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -79,10 +79,10 @@ class ListTest {
 	void kruskal() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a", null, null, 0, 0);
-		Place d1 = new Place("b", null, null, 0, 0);
-		Place d2 = new Place("c", null, null, 0, 0);
-		Place d3 = new Place("d", null, null, 0, 0);
+		Place d = new Place("a", null, null, 0, 0,0);
+		Place d1 = new Place("b", null, null, 0, 0,0);
+		Place d2 = new Place("c", null, null, 0, 0,0);
+		Place d3 = new Place("d", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -100,14 +100,14 @@ class ListTest {
 	void bfs() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("r", null, null, 0, 0);
-		Place d1 = new Place("s", null, null, 0, 0);
-		Place d2 = new Place("t", null, null, 0, 0);
-		Place d3 = new Place("u", null, null, 0, 0);
-		Place d4 = new Place("v", null, null, 0, 0);
-		Place d5 = new Place("w", null, null, 0, 0);
-		Place d6 = new Place("x", null, null, 0, 0);
-		Place d7 = new Place("y", null, null, 0, 0);
+		Place d = new Place("r", null, null, 0, 0,0);
+		Place d1 = new Place("s", null, null, 0, 0,0);
+		Place d2 = new Place("t", null, null, 0, 0,0);
+		Place d3 = new Place("u", null, null, 0, 0,0);
+		Place d4 = new Place("v", null, null, 0, 0,0);
+		Place d5 = new Place("w", null, null, 0, 0,0);
+		Place d6 = new Place("x", null, null, 0, 0,0);
+		Place d7 = new Place("y", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -131,12 +131,12 @@ class ListTest {
 	@Test
 	void dfs() {
 		ListAdjacency<Place> l = new ListAdjacency<>();
-		Place d = new Place("u", null, null, 0, 0);
-		Place d1 = new Place("v", null, null, 0, 0);
-		Place d2 = new Place("w", null, null, 0, 0);
-		Place d3 = new Place("x", null, null, 0, 0);
-		Place d4 = new Place("y", null, null, 0, 0);
-		Place d5 = new Place("z", null, null, 0, 0);
+		Place d = new Place("u", null, null, 0, 0,0);
+		Place d1 = new Place("v", null, null, 0, 0,0);
+		Place d2 = new Place("w", null, null, 0, 0,0);
+		Place d3 = new Place("x", null, null, 0, 0,0);
+		Place d4 = new Place("y", null, null, 0, 0,0);
+		Place d5 = new Place("z", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);

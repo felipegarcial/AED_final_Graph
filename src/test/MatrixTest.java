@@ -10,8 +10,8 @@ class MatrixTest {
 	@Test
 	void addEdge() {
 		IGraph<Place> g = new MatrixAdjacency<>();
-		Place p = new Place("Cali", null, null, 0, 0);
-		Place p1 = new Place("Popayan", null, null, 0, 0);
+		Place p = new Place("Cali", null, null, 0, 0,0);
+		Place p1 = new Place("Popayan", null, null, 0, 0,0);
 		g.addVertex(p);
 		g.addVertex(p1);
 		g.addEdge(p, p1, 123);
@@ -21,10 +21,10 @@ class MatrixTest {
 	void getAList() {
 		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a", null, null, 0, 0);
-		Place d1 = new Place("b", null, null, 0, 0);
-		Place d2 = new Place("c", null, null, 0, 0);
-		Place d3 = new Place("d", null, null, 0, 0);
+		Place d = new Place("a", null, null, 0, 0,0);
+		Place d1 = new Place("b", null, null, 0, 0,0);
+		Place d2 = new Place("c", null, null, 0, 0,0);
+		Place d3 = new Place("d", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -42,10 +42,10 @@ class MatrixTest {
 	void kruskal() {
 		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a", null, null, 0, 0);
-		Place d1 = new Place("b", null, null, 0, 0);
-		Place d2 = new Place("c", null, null, 0, 0);
-		Place d3 = new Place("d", null, null, 0, 0);
+		Place d = new Place("a", null, null, 0, 0,0);
+		Place d1 = new Place("b", null, null, 0, 0,0);
+		Place d2 = new Place("c", null, null, 0, 0,0);
+		Place d3 = new Place("d", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -63,10 +63,10 @@ class MatrixTest {
 	void testGetVertex() {
 		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a", null, null, 0, 0);
-		Place d1 = new Place("b", null, null, 0, 0);
-		Place d2 = new Place("c", null, null, 0, 0);
-		Place d3 = new Place("d", null, null, 0, 0);
+		Place d = new Place("a", null, null, 0, 0,0);
+		Place d1 = new Place("b", null, null, 0, 0,0);
+		Place d2 = new Place("c", null, null, 0, 0,0);
+		Place d3 = new Place("d", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -79,12 +79,12 @@ class MatrixTest {
 	void dijsktra() {
 		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("a", null, null, 0, 0);
-		Place d1 = new Place("b", null, null, 0, 0);
-		Place d2 = new Place("c", null, null, 0, 0);
-		Place d3 = new Place("d", null, null, 0, 0);
-		Place d4 = new Place("e", null, null, 0, 0);
-		Place d5 = new Place("z", null, null, 0, 0);
+		Place d = new Place("a", null, null, 0, 0,0);
+		Place d1 = new Place("b", null, null, 0, 0,0);
+		Place d2 = new Place("c", null, null, 0, 0,0);
+		Place d3 = new Place("d", null, null, 0, 0,0);
+		Place d4 = new Place("e", null, null, 0, 0,0);
+		Place d5 = new Place("z", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);
@@ -108,11 +108,11 @@ class MatrixTest {
 	void Prim() {
 		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
 		l.setDirected(false);
-		Place d = new Place("at", null, null, 0, 0);
-		Place d1 = new Place("ch", null, null, 0, 0);
-		Place d2 = new Place("ny", null, null, 0, 0);
-		Place d4 = new Place("de", null, null, 0, 0);
-		Place d5 = new Place("sf", null, null, 0, 0);
+		Place d = new Place("at", null, null, 0, 0,0);
+		Place d1 = new Place("ch", null, null, 0, 0,0);
+		Place d2 = new Place("ny", null, null, 0, 0,0);
+		Place d4 = new Place("de", null, null, 0, 0,0);
+		Place d5 = new Place("sf", null, null, 0, 0,0);
 		l.addVertex(d);
 		l.addVertex(d1);
 		l.addVertex(d2);

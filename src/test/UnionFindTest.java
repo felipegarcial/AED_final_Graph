@@ -10,7 +10,7 @@ class UnionFindTest {
 	@Test
 	void make() {
 		UnionFind<Place> u = new UnionFind<>(); 
-		Place c = new Place("cali");
+		Place c = new Place("cali", null, null, 0, 0,0);
 		u.makeset(c);
 		assertEquals(1, u.getRepresentantes().size());
 	}
@@ -18,9 +18,9 @@ class UnionFindTest {
 	@Test
 	void find() {
 		UnionFind<Place> u = new UnionFind<>(); 
-		Place c = new Place("cali");
-		Place c1 = new Place("popayan");
-		Place c2 = new Place("pasto");
+		Place c = new Place("cali", null, null, 0, 0,0);
+		Place c1 = new Place("popayan", null, null, 0, 0,0);
+		Place c2 = new Place("pasto", null, null, 0, 0,0);
 		u.makeset(c);
 		u.makeset(c1);
 		u.makeset(c2);
@@ -30,9 +30,9 @@ class UnionFindTest {
 	@Test
 	void union() {
 		UnionFind<Place> u = new UnionFind<>(); 
-		Place c = new Place("cali");
-		Place c1 = new Place("popayan");
-		Place c2 = new Place("pasto");
+		Place c = new Place("cali", null, null, 0, 0,0);
+		Place c1 = new Place("popayan", null, null, 0, 0,0);
+		Place c2 = new Place("pasto", null, null, 0, 0,0);
 		u.makeset(c);
 		u.makeset(c1);
 		u.makeset(c2);
