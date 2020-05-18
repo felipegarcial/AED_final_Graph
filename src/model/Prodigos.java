@@ -82,7 +82,7 @@ public class Prodigos {
 
 						vehicles.forEach((key, value) -> {
 							if (key.equals(idVehicle)) {
-								vehicles.get(idVehicle).addPlaceToDelivery(guide, nameClient, product, lat, lng);
+								vehicles.get(idVehicle).addPlaceToDelivery(guide, nameClient, product, lat, lng, adj);
 							}
 						});
 					}
