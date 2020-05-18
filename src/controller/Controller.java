@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import model.Place;
 import model.Prodigos;
@@ -36,6 +38,11 @@ public class Controller {
 	
 	public ArrayList<Place> getPlaces(String idVehcile ){
 		return prodigos.getPlacesByVehicles(idVehcile);
+	}
+	
+	
+	public LinkedList<Place> callAlogorithm(int algorithmImp, ArrayList <Place> places){
+		return prodigos.selectAlgorithm(algorithmImp, places);
 	}
 
 }

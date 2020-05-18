@@ -59,6 +59,7 @@ public class Main extends PApplet {
 				mapS.selectVehicle();
 				mapS.goInitScreen(0);
 				mapS.goRoutesScreen(1);
+				mapS.callAlgorithm();
 			break;
 
 		default:

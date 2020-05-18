@@ -2,13 +2,16 @@ package model;
 
 import java.util.ArrayList;
 
-public class Vehicle {
+public class Vehicle{
 	private String id;
 	private ArrayList<Place> places;
+	private int posX,posY;
 	
 	public Vehicle(String id) {
 		this.id = id;
 		places = new ArrayList<Place>();
+		posX=0;
+		posY=0;
 	}
 	
 	public void addPlaceToDelivery(String guide,String nameClient,String product, int lat, int lng) {
@@ -25,5 +28,21 @@ public class Vehicle {
 
 	public void setId(String id) {
 		this.id = id; 
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 }
