@@ -98,22 +98,22 @@ public class Prodigos {
 		
 		switch (algorithmImp) {
 		case 1:
-			chargeVertex(1, places);
+			/*chargeVertex(1, places);
 			IGraph<VertexConected<Place>> r = graph1.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
 			for (int i = 0; i < t.size(); i++) {
 				VertexConected<Place> f = t.get(i).getNode();
 				toReturn.add(f.getVertexEnd().getNode());
-			}
+			}*/
 			break;
 		case 2:
-			chargeVertex(2, places);
+			/*chargeVertex(2, places);
 			IGraph<VertexConected<Place>> r2 =graph2.kurskal();
 			ArrayList<Vertex<VertexConected<Place>>> t2 = r2.getVertex();
 			for (int i = 0; i <t2.size(); i++) {
 				VertexConected<Place> f = t2.get(i).getNode();
 				toReturn.add(f.getVertexEnd().getNode());
-			}
+			}*/
 			break;
 		case 3:
 			//Prim lista
@@ -155,7 +155,6 @@ public class Prodigos {
 		else{
 			graph2.addEdge(p1, p2, getWeigth(p1, p2));
 		}
->>>>>>> c8692203d18546dadd3b995e545f71f8bb99a634
 	}
 
 	public int getWeigth(Place p1, Place p2) {
