@@ -103,4 +103,32 @@ class MatrixTest {
 		ArrayList<Vertex<Place>> actual = l.dijsktra(d);
 		assertEquals("a", actual.get(2).getNode().getGuide());
 	}
+	
+	@Test
+	void Prim() {
+		MatrixAdjacency<Place> l = new MatrixAdjacency<>();
+		l.setDirected(false);
+		Place d = new Place("at", null, null, 0, 0);
+		Place d1 = new Place("ch", null, null, 0, 0);
+		Place d2 = new Place("ny", null, null, 0, 0);
+		Place d4 = new Place("de", null, null, 0, 0);
+		Place d5 = new Place("sf", null, null, 0, 0);
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d4);
+		l.addVertex(d5);
+		l.addEdge(d, d1, 700);
+		l.addEdge(d, d2, 800);
+		l.addEdge(d, d4, 1400);
+		l.addEdge(d, d5, 2200);
+		l.addEdge(d4, d2, 1600);
+		l.addEdge(d4, d1, 1300);
+		l.addEdge(d4, d5, 900);
+		l.addEdge(d1, d5, 1200);
+		l.addEdge(d1, d2, 1000);
+		l.addEdge(d2, d5, 2000);
+		MatrixAdjacency<VertexConected<Place>> actual = (MatrixAdjacency<VertexConected<Place>>) l.prim(d);
+		assertEquals(4, actual.getSize());
+	}
 }
