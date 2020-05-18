@@ -2,16 +2,23 @@ package model;
 
 public class Place {
 	private String guide,nameClient,product;
-	private int lat,lng;
+	private int lat,lng, adjacent;
 	
-	public Place(String guide,String nameClient,String product, int lat, int lng) {
+	public Place(String guide,String nameClient,String product, int lat, int lng, int idAdj) {
 		this.guide=guide;
 		this.nameClient=nameClient;
 		this.product=product;
 		this.lat=lat;
 		this.lng=lng;
+		this.adjacent =idAdj;
 	}
+	
+	
 
+	public int getAdjacent() {
+		return adjacent;
+	}
+	
 	public String getGuide() {
 		return guide;
 	}
