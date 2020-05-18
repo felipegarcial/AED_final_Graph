@@ -13,7 +13,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public class MapScreen extends Screen {
+public class MapScreen extends Screen implements Runnable{
 
 	private PApplet app;
 	private FontComponent fontC;
@@ -28,6 +28,8 @@ public class MapScreen extends Screen {
 	private int algorithmImp;
 	private LinkedList<Place> placesGraph;
 	private ArrayList<LineGraph> lineG;
+	private int posXVehicle,posYVehicle;
+	private boolean callAlgorimt;
 
 	public MapScreen(PApplet app) {
 		super("Mapa Enrutador", app);
@@ -61,6 +63,9 @@ public class MapScreen extends Screen {
 
 		placesGraph = new LinkedList<Place>();
 		lineG = new ArrayList<LineGraph>();
+		posXVehicle = 790;
+		posYVehicle = 440;
+		callAlgorimt = false;
 	}
 
 	public void draw() {
@@ -74,6 +79,9 @@ public class MapScreen extends Screen {
 		drawVehicles();
 		drawLinesGraph();
 		drawPlaces();
+		drawAlogorithmName(algorithmImp);
+		drawVehicle();
+
 	}
 
 	private void drawButtons() {
@@ -114,6 +122,8 @@ public class MapScreen extends Screen {
 				idVehicleTList.get(i).setSelected(true);
 				placesByVehicle = mapC.getPlaces(idVehicleTList.get(i).getId());
 				lineG.clear();
+				posXVehicle = 790;
+				posYVehicle = 440;
 			} else if ((app.mouseX > 26 && app.mouseX < 140 && app.mouseY > 135 && app.mouseY < 390)) {
 				idVehicleTList.get(i).setSelected(false);
 			}
@@ -148,39 +158,51 @@ public class MapScreen extends Screen {
 
 		btns[2].click(new Callable<Void>() {
 			public Void call() {
-				algorithmImp = 0;
+				lineG.clear();
+				algorithmImp = 1;
 				placesGraph = mapC.callAlogorithm(algorithmImp, placesByVehicle);
 				addLinesGraph();
+				callAlgorimt = true;
 				return null;
 			}
 		});
 
 		btns[3].click(new Callable<Void>() {
 			public Void call() {
-				algorithmImp = 1;
+				lineG.clear();
+				algorithmImp = 2;
 				placesGraph = mapC.callAlogorithm(algorithmImp, placesByVehicle);
 				addLinesGraph();
+				callAlgorimt = true;
 				return null;
 			}
 		});
 
 		btns[4].click(new Callable<Void>() {
 			public Void call() {
-				algorithmImp = 2;
+				lineG.clear();
+				algorithmImp = 3;
 				placesGraph = mapC.callAlogorithm(algorithmImp, placesByVehicle);
 				addLinesGraph();
+				callAlgorimt = true;
 				return null;
 			}
 		});
 
 		btns[5].click(new Callable<Void>() {
 			public Void call() {
-				algorithmImp = 3;
+				lineG.clear();
+				algorithmImp = 4;
 				placesGraph = mapC.callAlogorithm(algorithmImp, placesByVehicle);
 				addLinesGraph();
+				callAlgorimt = true;
 				return null;
 			}
 		});
+		
+		if(callAlgorimt) {
+			new Thread(this).start();
+		}
 	}
 
 	private void addLinesGraph() {
@@ -190,17 +212,65 @@ public class MapScreen extends Screen {
 		int posYTwo = 0;
 
 		for (int i = 0; i < placesGraph.size(); i++) {
-				posXOne = placesGraph.get(i).getLat()+230;
-				posYOne = placesGraph.get(i).getLng()+135;
-				posXTwo = i+1 <placesGraph.size() ? placesGraph.get(i+1).getLat()+230:placesGraph.get(0).getLat()+230;
-				posYTwo = i+1 <placesGraph.size() ? placesGraph.get(i+1).getLng()+135:placesGraph.get(0).getLng()+135;
-				lineG.add(new LineGraph(app, posXOne, posYOne, posXTwo, posYTwo));
+			posXOne = placesGraph.get(i).getLat() + 230;
+			posYOne = placesGraph.get(i).getLng() + 135;
+			posXTwo = i + 1 < placesGraph.size() ? placesGraph.get(i + 1).getLat() + 230
+					: placesGraph.get(0).getLat() + 230;
+			posYTwo = i + 1 < placesGraph.size() ? placesGraph.get(i + 1).getLng() + 135
+					: placesGraph.get(0).getLng() + 135;
+			lineG.add(new LineGraph(app, posXOne, posYOne, posXTwo, posYTwo));
 		}
 	}
 
-	public void drawLinesGraph() {
+	private void drawLinesGraph() {
 		for (int i = 0; i < lineG.size(); i++) {
 			lineG.get(i).draw();
 		}
 	}
+
+	private void drawAlogorithmName(int algorithm) {
+		String textA = "";
+		switch (algorithm) {
+		case 1:
+			textA = "Kruskal con Lista";
+			break;
+		case 2:
+			textA = "Kruskal con Matriz";
+			break;
+		case 3:
+			textA = "Prim con Lista";
+			break;
+		case 4:
+			textA = "Prim con Matriz";
+			break;
+		default:
+			textA = "";
+			break;
+		}
+		fontC.draw(textA, "montserrat-semibold", 15, 100, 100, 100, 795, 510);
+	}
+
+	private void drawVehicle() {
+		app.image(vehicle, posXVehicle, posYVehicle);
+	}
+
+
+	public void run() {
+		if(callAlgorimt) {
+			for (int i = 0; i < placesGraph.size(); i++) {
+				try {
+					posXVehicle=placesGraph.get(i).getLat()+230;
+					posYVehicle=placesGraph.get(i).getLng()+135;
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			callAlgorimt= false;
+		}
+		
+	}
+	
+	
 }
