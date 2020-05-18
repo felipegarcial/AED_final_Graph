@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Prodigos {
@@ -91,13 +93,25 @@ public class Prodigos {
 	}
 
 	public Queue<Place> selectAlgorithm(int algorithmImp, ArrayList<Place> places) {
-
+		Queue<Place> toReturn = new LinkedList<>();
 		switch (algorithmImp) {
 		case 1:
-			//kruscal lista
+			chargeVertex(1, places);
+			IGraph<VertexConected<Place>> r = graph1.kurskal();
+			ArrayList<Vertex<VertexConected<Place>>> t = r.getVertex();
+			for (int i = 0; i < t.size(); i++) {
+				VertexConected<Place> f = t.get(i).getNode();
+				toReturn.add(f.getVertexEnd().getNode());
+			}
 			break;
 		case 2:
-			//kruscal matriz
+			chargeVertex(2, places);
+			IGraph<VertexConected<Place>> r2 =graph2.kurskal();
+			ArrayList<Vertex<VertexConected<Place>>> t2 = r2.getVertex();
+			for (int i = 0; i <t2.size(); i++) {
+				VertexConected<Place> f = t2.get(i).getNode();
+				toReturn.add(f.getVertexEnd().getNode());
+			}
 			break;
 		case 3:
 			//Prim lista
@@ -109,6 +123,30 @@ public class Prodigos {
 			break;
 		}
 		return null;
+		
+	}
+	
+	
+	//agrega todos los vertices a la estructura correspondiente
+	public void chargeVertex(int al , ArrayList<Place> places) {
+		for (int i = 0; i < places.size(); i++) {
+			if(al == 1) {
+				graph1.addVertex(places.get(i));
+			}
+			else{
+				graph2.addVertex(places.get(i));
+			}
+		}
+	}
+	
+//	agrega todas las aristas
+	public void chargeEdges(int al, Place p1, Place p2) {
+		if(al == 1) {
+			graph1.addEdge(p1, p2, getWeigth(p1, p2));
+		}
+		else{
+			graph2.addEdge(p1, p2, getWeigth(p1, p2));
+		}
 	}
 
 	public int getWeigth(Place p1, Place p2) {

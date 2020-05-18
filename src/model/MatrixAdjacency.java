@@ -1,15 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
-import unionFind.IUnionFind;
-import unionFind.UnionFind;
+import java.lang.reflect.Array;
+import java.util.*;
+import unionFind.*;
 
 public class MatrixAdjacency <V> implements IGraph<V> {
 	public static int QUANTITY_VERTEX = 15;
@@ -31,6 +24,15 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 	}
 	
 	
+	public  ArrayList<Vertex<V>> getVertex() {
+		ArrayList<Vertex<V>> toReturn = new ArrayList<>();
+		for (int i = 0; i < vertex.size(); i++) {
+			toReturn.add(vertex.get(i));
+		}
+		return toReturn;
+	}
+
+
 	public boolean isDirected() {
 		return directed;
 	}
