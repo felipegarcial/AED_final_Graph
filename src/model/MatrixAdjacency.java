@@ -153,7 +153,7 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 
 	@Override
 	public IGraph<VertexConected<V>> prim(V v) {//test
-		ListAdjacency<VertexConected<V>> toReturn = new ListAdjacency<>();
+		IGraph<VertexConected<V>> toReturn = new MatrixAdjacency<>();
 		int index = indexVertex.get(v);
 	    Vertex<V> f = vertex.get(index);
 	    f.setDistance(0);
@@ -178,6 +178,24 @@ public class MatrixAdjacency <V> implements IGraph<V> {
 				}
 			}
 			u.setColor(Vertex.BLACK);
+		}
+		toReturn = returPrim();
+		return toReturn;
+	}
+	
+	public IGraph<VertexConected<V>> returPrim() {
+		IGraph<VertexConected<V>> toReturn = new MatrixAdjacency<>();
+		for (int i = 0; i < vertex.size(); i++) {
+			Vertex<V> u = vertex.get(i);
+			List<VertexConected<V>> adja = getAList(u.getNode());
+			for (int j = 0; j < adja.size(); j++) {
+				VertexConected<V> t = adja.get(j);
+				if(t.getVertexEnd().getPredecessor()!= null) {
+					if(t.getVertexEnd().getPredecessor().getIndex() == u.getIndex()) {
+						toReturn.addVertex(t);
+					}					
+				}
+			}
 		}
 		return toReturn;
 	}
