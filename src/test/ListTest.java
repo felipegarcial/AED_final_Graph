@@ -156,7 +156,21 @@ class ListTest {
 	
 	@Test
 	void floyd() {
-		
+		ListAdjacency<Place> l = new ListAdjacency<>();
+		Place d = new Place("1", null, null, 0, 0,0);
+		Place d1 = new Place("2", null, null, 0, 0,0);
+		Place d2 = new Place("3", null, null, 0, 0,0);
+		Place d3 = new Place("4", null, null, 0, 0,0);
+		l.addVertex(d);
+		l.addVertex(d1);
+		l.addVertex(d2);
+		l.addVertex(d3);
+		l.addEdge(d, d2, -2);
+		l.addEdge(d2, d3, 2);
+		l.addEdge(d3, d1, -1);
+		l.addEdge(d1, d, 4);
+		l.addEdge(d1, d2, 3);
+		l.floyd();
 	}
 
 }

@@ -253,9 +253,19 @@ public class ListAdjacency<V> implements IGraph<V> {
 	
     public int [][] Matrix(){
 		int [][] matrix = new int[size][size];
+		for (int i =0; i< matrix.length;i++) {
+			for (int j = 0; j< matrix[0].length; j++) {
+				if(i==j) {
+					matrix[i][j] = 0;
+				}
+				else {					
+					matrix[i][j] = Integer.MAX_VALUE;
+				}
+			}
+		}
 		for (int i = 0; i < vertex.size(); i++) {
 			Vertex<V> origin = vertex.get(i);
-			List<VertexConected<V>> adjacent = adjacents.get(origin);
+			List<VertexConected<V>> adjacent = adjacents.get(origin.getIndex());
 			for (int j = 0; j <adjacent.size();j++) {
 				VertexConected<V> currentEdge = adjacent.get(j);
 				Vertex<V> destination = currentEdge.getVertexEnd();
@@ -283,8 +293,14 @@ public class ListAdjacency<V> implements IGraph<V> {
 		for(k=0;k<size;k++) {
 			for(i=0;i<size;i++) {
 				for(j=0;j<size;j++) {
-					if(dist[i][k] + dist[k][j] < dist[i][j]) {
-						dist[i][j] = dist[i][k] + dist[k][j];
+					int d1 = dist[i][j];
+					int d2 = dist[i][k];
+					int d3 = dist[k][j];
+					if(d2!= Integer.MAX_VALUE && d3!= Integer.MAX_VALUE) {
+						int d4 = ( d2+ d3);
+						if(d1 > d4) {
+							dist[i][j] = dist[i][k] + dist[k][j];
+						}
 					}
 				}
 			}
