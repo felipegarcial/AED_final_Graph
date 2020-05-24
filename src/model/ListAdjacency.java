@@ -209,6 +209,7 @@ public class ListAdjacency<V> implements IGraph<V> {
 				toReturn.addVertex(edge);
 				ds.union(edge.getV(), edge.getVertexEnd());
 			}
+			//si me piden los disconexos le pongo el syso aqui del tamaño del arreglo del union
 		}
 		return toReturn;
 	}
